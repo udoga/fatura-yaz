@@ -1,0 +1,17 @@
+page_size: A4
+font_size: 12
+
+date:
+  at: [429, 619]
+buyer-address:
+  at: [80, 626]
+  width: 230
+  height: 42
+general_total:
+  at: [529, 100]
+  align: :right
+line-items:
+  repeat: [0, -28]
+  description:
+    at: [80, 491]
+    width: 219
