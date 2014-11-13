@@ -10,8 +10,8 @@ buyer-address:
 general_total:
   at: [529, 100]
   align: :right
-line-items:
-  repeat: [0, -28]
+line_items:
+  next_pos: [0, -28]
   description:
     at: [80, 491]
     width: 219

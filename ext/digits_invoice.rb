@@ -14,7 +14,7 @@ class DigitsInvoice
     draw_text 'Tic. Sicil No :  750000',            at: [336, 689], size: 9
     draw_text 'ABCD Yazılım ve Dan. Tic. Ltd. Şti.', at: [80, 633]
     @pdf.text_box "\nİnkılap Mah. Küçüksu Cad. No:111/1" +
-                      "\n34768         Ümraniye / İstanbul", at: [80, 626], width: 230, height: 42
+                  "\n34768         Ümraniye / İstanbul", at: [80, 626], width: 230, height: 42
     draw_text '25/08/2014', at: [429, 619]
     draw_text '17:00', at: [429, 590]
     draw_text 'ÜMRANİYE', at: [80, 548]
