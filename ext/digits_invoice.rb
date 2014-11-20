@@ -9,53 +9,54 @@ class DigitsInvoice
   end
 
   def generate
-    draw_text 'Internet      :  www.example.com', at: [336, 704], size: 9
-    draw_text 'Tic. Sicil No :  750000',            at: [336, 689], size: 9
-    draw_text 'ABCD Yazılım ve Dan. Tic. Ltd. Şti.', at: [80, 633]
-    text_box "\nİnkılap Mah. Küçüksu Cad. No:111/1" +
-             "\n34768         Ümraniye / İstanbul", at: [80, 626], width: 230, height: 42
-    draw_text '25/08/2014', at: [429, 619]
-    draw_text '17:00', at: [429, 590]
-    draw_text 'ÜMRANİYE', at: [80, 548]
-    draw_text '7360000000', at: [358, 548]
-
-    text_box "Teknik Hizmet Bedeli\n  ( 000 TL / Gün )", at: [80, 499], width: 219
-    text_box '20', at: [317, 499], width: 36, align: :center
-    text_box 'Gün', at: [346, 499], width: 22, align: :center
-    text_box '000.00', at: [421, 499], width: 63, align: :right
-    text_box '00,000.00', at: [529, 499], width: 108, align: :right
-
-    draw_text 'SIFIR TL.', at: [80, 162]
-    draw_text '00,000.00', at: [529, 162], align: :right
-    draw_text '00', at: [421, 131], align: :right
-    draw_text '0,000.00', at: [529, 131], align: :right
-    draw_text '00,000.00', at: [529, 100], align: :right
-    draw_text 'Hesap No    : Isbank TR000000000000000000000000', at: [44, 130]
-    draw_text 'Teslim Alan : ', at: [44, 100]
+    write 'Internet      :  www.example.com', left: [336, 711], size: 9
+    write 'Tic. Sicil No :  750000', left: [336, 697], size: 9
+    write 'ABCD Yazılım ve Dan. Tic. Ltd. Şti.', left: [80, 641]
+    write "\nİnkılap Mah. Küçüksu Cad. No:111/1" +
+          "\n34768         Ümraniye / İstanbul", left: [80, 627], width: 230, height: 42
+    write '25/08/2014', left: [429, 627]
+    write '17:00', left: [429, 598]
+    write 'ÜMRANİYE', left: [80, 556]
+    write '7360000000', left: [358, 556]
+    write "Teknik Hizmet Bedeli\n  ( 000 TL / Gün )", left: [80, 499], width: 219
+    write '20', center: [317, 499], width: 36
+    write 'Gün', center: [346, 499], width: 22
+    write '000.00', right: [421, 499], width: 63
+    write '00,000.00', right: [529, 499], width: 108
+    write 'SIFIR TL.', left: [80, 170]
+    write '00,000.00', right: [529, 170]
+    write '00', right: [421, 139]
+    write '0,000.00', right: [529, 139]
+    write '00,000.00', right: [529, 108]
+    write 'Hesap No    : Isbank TR000000000000000000000000', left: [44, 139]
+    write 'Teslim Alan : ', left: [44, 108]
 
     @pdf.render_file('digits_invoice.pdf')
   end
 
-  def text_box(text, options)
-    align = options[:align]
-    if align and options[:at]
-      text_width = options[:width]
-      shift_amount = {:left => 0, :right => text_width, :center => text_width/2}[align]
-      raise ArgumentError, "invalid alignment value '#{align}'" unless shift_amount
-      options[:at][0] -= shift_amount
-    end
+  def write(text, options)
+    position_key = get_position_key(options.keys)
+    width = get_item_width(text, options)
+    shift_amount = {:left => 0, :center => width/2, :right => width}[position_key]
+    position = options.delete(position_key)
+    position[0] -= shift_amount
+    options[:at] = position
+    options[:align] = position_key if options[:width] or options[:height]
     @pdf.text_box(text, options)
   end
 
-  def draw_text(text, options)
-    align = options.delete(:align)
-    if align and options[:at]
-      text_width = @pdf.width_of(text)
-      shift_amount = {:left => 0, :right => text_width, :center => text_width/2}[align]
-      raise ArgumentError, "invalid alignment value '#{align}'" unless shift_amount
-      options[:at][0] -= shift_amount
+  # TODO: dogrulama. get_type. tyoe'a göre align konulacak.
+
+  def get_position_key(option_keys)
+    [:left, :center, :right].each do |position_key|
+      return position_key if option_keys.include? position_key
     end
-    @pdf.draw_text(text, options)
+  end
+
+  def get_item_width(text, options)
+    return options[:width] if options[:width]
+    # TODO: height varsa sayfa sonuna kadarki kismin iki kati donulecek.
+    @pdf.width_of(text)
   end
 end
 
