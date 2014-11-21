@@ -1,6 +1,8 @@
 require 'prawn'
 
 class PageWriter < Prawn::Document
+  @@valid_position_keys = [:left, :right, :center]
+
   def write(text, options)
     position_key = get_position_key(options.keys)
     width = get_item_width(text, options)
@@ -15,7 +17,7 @@ class PageWriter < Prawn::Document
   # TODO: dogrulama. get_type. type'a göre align konulacak.
 
   def get_position_key(option_keys)
-    [:left, :center, :right].each do |position_key|
+    @@valid_position_keys.each do |position_key|
       return position_key if option_keys.include? position_key
     end
   end

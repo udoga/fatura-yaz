@@ -9,7 +9,7 @@ class InvoiceConfig
     @font = '../fonts/' + (params.delete('font') || 'Arial') + '.ttf'
     @font_size = params.delete('font_size') || '10'
     @default_leading = params.delete('default_leading') || 0
-    @addenda = params.delete('addenda')
+    @addenda = params.delete('addenda') || {}
     @page_items = params
   end
 
@@ -42,7 +42,9 @@ class InvoiceConfig
   end
 
   def addenda(content)
-    convert_keys_to_symbols(@addenda[content])
+    attributes = @addenda[content]
+    return nil unless attributes
+    convert_keys_to_symbols(attributes)
   end
 
   def get_addenda_contents
