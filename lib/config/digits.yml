@@ -17,8 +17,8 @@ buyer-tax_office:
   left: [80, 556]
 buyer-tax_office_no:
   left: [358, 556]
-line-items:
-  row-space: 14
+line_items:
+  row_space: 14
   description:
     left: [80, 499]
     width: 219
@@ -43,7 +43,7 @@ tax_amount:
 general_total:
   right: [529, 108]
 general_total_reading:
-  right: [80, 170]
+  left: [80, 170]
 
 addenda:
   'Internet      :  www.example.com':

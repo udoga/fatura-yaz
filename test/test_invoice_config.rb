@@ -28,4 +28,9 @@ class TestPageConfig < MiniTest::Test
     assert_equal nil, @config.page_item('line_items.id')
     assert_equal nil, @config.page_item('line_items.id.something')
   end
+
+  def test_addenda
+    assert_equal 9, @config.addenda('some content')[:size]
+    assert_equal ['some content'], @config.get_addenda_contents
+  end
 end

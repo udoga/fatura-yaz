@@ -2,7 +2,7 @@ require 'yaml'
 
 class InvoiceConfig
   private_class_method :new
-  attr_reader :page_size, :font_size, :font, :default_leading, :addenda
+  attr_reader :page_size, :font_size, :font, :default_leading
 
   def initialize(params)
     @page_size = params.delete('page_size') || 'A4'
@@ -39,5 +39,13 @@ class InvoiceConfig
       result = result[key]
     end
     result
+  end
+
+  def addenda(content)
+    convert_keys_to_symbols(@addenda[content])
+  end
+
+  def get_addenda_contents
+    @addenda.keys
   end
 end
