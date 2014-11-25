@@ -10,30 +10,32 @@ class InvoiceWriter
   end
 
   def generate(invoice_data)
-    @writer.write '25/08/2014', @config.page_item('date')
-    @writer.write '17:00', @config.page_item('time')
-    @writer.write 'ABCD Yazılım ve Dan. Tic. Ltd. Şti.', @config.page_item('buyer-name')
-    @writer.write "\nİnkılap Mah. Küçüksu Cad. No:111/1" +
-                  "\n34768         Ümraniye / İstanbul", @config.page_item('buyer-address')
-    @writer.write 'ÜMRANİYE', @config.page_item('buyer-tax_office')
-    @writer.write '7360000000', @config.page_item('buyer-tax_office_no')
+    write_invoice_data invoice_data
+    write_addenda_contents
+    @writer.render_file('../output.pdf')
+  end
 
-    @writer.write "Teknik Hizmet Bedeli\n  ( 000 TL / Gün )", @config.page_item('line_items.description')
-    @writer.write '20', @config.page_item('line_items.quantity')
-    @writer.write 'Gün', @config.page_item('line_items.unit')
-    @writer.write '000.00', @config.page_item('line_items.unit_price')
-    @writer.write '00,000.00', @config.page_item('line_items.line_total')
+  def write_invoice_data(invoice_data)
+    invoice_data.keys.each do |field_name|
+      if field_name == 'line_items'
+        write_line_items(invoice_data['line_items'])
+      else
+        @writer.write invoice_data[field_name], @config.page_item(field_name)
+      end
+    end
+  end
 
-    @writer.write '00,000.00', @config.page_item('total')
-    @writer.write '00', @config.page_item('tax_rate')
-    @writer.write '0,000.00', @config.page_item('tax_amount')
-    @writer.write '00,000.00', @config.page_item('general_total')
-    @writer.write 'SIFIR TL.', @config.page_item('general_total_reading')
+  def write_line_items(line_items)
+    line_items.each do |line_item|
+      line_item.keys.each do |field|
+        @writer.write line_item[field], @config.page_item("line_items.#{field}")
+      end
+    end
+  end
 
+  def write_addenda_contents
     @config.get_addenda_contents.each do |content|
       @writer.write content, @config.addenda(content)
     end
-
-    @writer.render_file('../output.pdf')
   end
 end

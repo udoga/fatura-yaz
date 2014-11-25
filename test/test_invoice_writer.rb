@@ -6,6 +6,30 @@ class TestInvoiceWriter < MiniTest::Test
   def setup
     @config = InvoiceConfig.from_file('../lib/config/digits.yml')
     @invoice_writer = InvoiceWriter.new(@config)
-    @invoice_data = :invoice_data
+    @invoice_data =
+        {'date' => '01/01/2014',
+         'time' => '17:00',
+         'buyer-name' => 'ABCD Yazılım ve Dan. Tic. Ltd. Şti.',
+         'buyer-address' => "\nİnkılap Mah. Küçüksu Cad. No:111/1\n34768         Ümraniye / İstanbul",
+         'buyer-tax_office' => 'ÜMRANİYE',
+         'buyer-tax_office_no' => '7360000000',
+         'line_items' => [
+            {'description' => "Teknik Hizmet Bedeli\n  ( 000 TL / Gün )",
+             'quantity' => '20',
+             'unit' => 'Gün',
+             'unit_price' => '000.00',
+             'line_total' => '00,000.00'}
+         ],
+         'total' => '00,000.00',
+         'tax_rate' => '00',
+         'tax_amount' => '0,000.00',
+         'general_total' => '00,000.00',
+         'general_total_reading' => 'SIFIR TL.'
+        }
+  end
+
+  def test_generate_invoice
+    skip 'takes long time'
+    @invoice_writer.generate @invoice_data
   end
 end
