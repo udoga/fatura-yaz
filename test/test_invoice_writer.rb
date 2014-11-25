@@ -8,9 +8,4 @@ class TestInvoiceWriter < MiniTest::Test
     @invoice_writer = InvoiceWriter.new(@config)
     @invoice_data = :invoice_data
   end
-
-  # def test_creates_pdf
-  #   @invoice_writer.generate(@invoice_data)
-  #   assert File.exist?('../output.pdf')
-  # end
 end
