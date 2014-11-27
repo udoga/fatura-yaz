@@ -18,7 +18,7 @@ class InvoiceWriter
   def write_invoice_data(invoice_data)
     invoice_data.keys.each do |field_name|
       if field_name == 'line_items'
-        write_line_items(invoice_data['line_items'])
+        write_line_items(invoice_data[field_name])
       else
         @writer.write invoice_data[field_name], @config.page_item(field_name)
       end

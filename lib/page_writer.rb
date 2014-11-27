@@ -2,6 +2,13 @@ require 'prawn'
 require 'pdf/core'
 
 class PageWriter < Prawn::Document
+  attr_reader :page_dimensions
+
+  def initialize(options)
+    @page_dimensions = get_page_dimensions(options[:page_size])
+    super options
+  end
+
   def write(text, options)
     options = convert_options(options, text)
     text_box text, options
@@ -10,7 +17,9 @@ class PageWriter < Prawn::Document
   def convert_options(options, text)
     @text = text
     @options = options
-    @position_key = get_position_key
+    validate_options
+
+    @position_key = get_position_keys.first
     @text_width = width_of text
     @wrap_width = calculate_wrap_width
     @width = @options[:width]
@@ -27,11 +36,39 @@ class PageWriter < Prawn::Document
     @options
   end
 
-  def get_position_key
-    option_keys = @options.keys
-    [:left, :right, :center].each do |position_key|
-      return position_key if option_keys.include? position_key
+  def validate_options
+    validate_attributes_and_types
+    validate_position_key
+  end
+
+  def validate_attributes_and_types
+    @options.each do |attribute, value|
+      if is_position_key(attribute)
+        raise InvalidOptions.new, "'#{attribute}' value must be an integer array." unless (value.is_a? Array and
+            value.all? {|i| i.is_a? Integer})
+        raise InvalidOptions.new "'#{attribute}' value array size must be 2." unless value.size == 2
+      elsif [:width, :height].include? attribute
+        raise InvalidOptions.new "'#{attribute}' value must be an integer." unless value.is_a? Integer
+      elsif attribute == :single_line
+        raise InvalidOptions.new "'#{attribute}' value must be boolean." unless !!value == value
+      else
+        raise InvalidOptions.new, "Invalid attribute: '#{attribute}'"
+      end
     end
+  end
+
+  def validate_position_key
+    position_keys = get_position_keys
+    raise InvalidOptions.new, 'The position attribute is required.' if position_keys.empty?
+    raise InvalidOptions.new, 'There can be only one position attribute.' if position_keys.size > 1
+  end
+
+  def get_position_keys
+    @options.keys.select {|key| is_position_key(key)}
+  end
+
+  def is_position_key(attribute)
+    [:left, :center, :right].include? attribute
   end
 
   def convert_position_key
@@ -42,7 +79,7 @@ class PageWriter < Prawn::Document
   end
 
   def calculate_wrap_width
-    page_width = get_page_dimensions[0]
+    page_width = @page_dimensions[0]
     left_amount = @options[@position_key][0]
     right_amount = page_width - left_amount
     {:left => right_amount, :center => [left_amount, right_amount].min, :right => left_amount}[@position_key]
@@ -53,7 +90,11 @@ class PageWriter < Prawn::Document
     @wrap_width
   end
 
-  def get_page_dimensions
-    PDF::Core::PageGeometry::SIZES['A4']
+  def get_page_dimensions(page_size)
+    PDF::Core::PageGeometry::SIZES[page_size]
+  end
+
+  class InvalidOptions < StandardError
+
   end
 end
