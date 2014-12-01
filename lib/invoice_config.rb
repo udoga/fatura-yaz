@@ -24,6 +24,17 @@ class InvoiceConfig
     convert_keys_to_symbols(attributes)
   end
 
+  def addenda(content)
+    attributes = @addenda[content]
+    return nil unless attributes
+    convert_keys_to_symbols(attributes)
+  end
+
+  def get_addenda_contents
+    @addenda.keys
+  end
+
+  private
   def convert_keys_to_symbols(hash)
     hash.keys.each do |key|
       hash[key.to_sym] = hash.delete(key)
@@ -38,15 +49,5 @@ class InvoiceConfig
       result = result[key]
     end
     result
-  end
-
-  def addenda(content)
-    attributes = @addenda[content]
-    return nil unless attributes
-    convert_keys_to_symbols(attributes)
-  end
-
-  def get_addenda_contents
-    @addenda.keys
   end
 end

@@ -34,6 +34,7 @@ class PageWriter < Prawn::Document
     @options
   end
 
+  private
   def get_position_key
     @options.keys.each do |attribute|
       return attribute if [:left, :center, :right].include? attribute

@@ -15,6 +15,7 @@ class InvoiceWriter
     @writer.render_file('../output.pdf')
   end
 
+  private
   def write_invoice_data(invoice_data)
     invoice_data.keys.each do |field_name|
       if field_name == 'line_items'
