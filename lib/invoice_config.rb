@@ -1,7 +1,6 @@
 require 'yaml'
 
 class InvoiceConfig
-  private_class_method :new
   attr_reader :page_size, :font_size, :font, :default_leading
 
   def initialize(params)

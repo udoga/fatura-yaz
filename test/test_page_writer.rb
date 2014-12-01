@@ -75,31 +75,8 @@ class TestPageWriter < MiniTest::Test
     assert_equal result, @writer.convert_options(options, @text)
   end
 
-  def test_validates_attributes_and_types
-    assert_raises_invalid_options({:something => 'value'}, "Invalid attribute: 'something'")
-    assert_raises_invalid_options({:left => 'wrong type'}, "'left' value must be an integer array.")
-    assert_raises_invalid_options({:right => [2, 'wrong type']}, "'right' value must be an integer array.")
-    assert_raises_invalid_options({:center => [1, 2, 3]}, "'center' value array size must be 2.")
-    assert_raises_invalid_options({:left => [0, 0], :width => 'wrong type'}, "'width' value must be an integer.")
-    assert_raises_invalid_options({:left => [0, 0], :single_line => 1}, "'single_line' value must be boolean.")
-  end
-
-  def test_validates_position_key
-    assert_raises_invalid_options({}, 'The position attribute is required.')
-    assert_raises_invalid_options({:width => 300}, 'The position attribute is required.')
-    assert_raises_invalid_options({:left => [0, 0], :right => [0, 0]}, 'There can be only one position attribute.')
-  end
-
   def set_text(text)
     @text = text
     @text_width = @writer.width_of(text)
-  end
-
-  def assert_raises_invalid_options(options, message=nil)
-    set_text ''
-    exception = assert_raises(PageWriter::InvalidOptions) do
-      @writer.convert_options(options, @text)
-    end
-    assert_equal message, exception.message if message
   end
 end
