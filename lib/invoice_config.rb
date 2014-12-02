@@ -19,18 +19,21 @@ class InvoiceConfig
   end
 
   def page_item(page_item_name)
-    attributes = get_key_path_value(@page_items, page_item_name.split('.'))
-    return nil unless attributes
-    convert_keys_to_symbols(attributes)
+    options = get_key_path_value(@page_items, page_item_name.split('.'))
+    return nil unless options
+    return options unless options.is_a? Hash
+    convert_keys_to_symbols(options)
   end
 
   def addenda(content)
-    attributes = @addenda[content]
-    return nil unless attributes
-    convert_keys_to_symbols(attributes)
+    options = @addenda[content]
+    return nil unless options
+    return options unless options.is_a? Hash
+    convert_keys_to_symbols(options)
   end
 
   def get_addenda_contents
+    return @addenda unless @addenda.is_a? Hash
     @addenda.keys
   end
 

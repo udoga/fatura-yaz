@@ -2,6 +2,7 @@ class ConfigValidator
   def validate_config(config)
     @config_error_message = nil
     validate_page_items_options(config)
+    validate_addenda_options(config)
     raise InvalidConfig.new @config_error_message if @config_error_message
   end
 
@@ -19,12 +20,32 @@ line_items.description line_items.quantity line_items.unit line_items.unit_price
 total tax_rate tax_amount general_total general_total_reading)
     page_item_names.each do |page_item_name|
       options = config.page_item(page_item_name)
-      if options
+      validate_config_group(options, page_item_name)
+    end
+  end
+
+  def validate_addenda_options(config)
+    addenda_contents = config.get_addenda_contents
+    if addenda_contents.is_a? Array
+      addenda_contents.each do |addenda_content|
+        options = config.addenda(addenda_content)
+        validate_config_group(options, "addenda - '#{addenda_content}'")
+      end
+    else
+      add_config_error_message "addenda\nMissing contents."
+    end
+  end
+
+  def validate_config_group(options, title)
+    if options
+      if options.is_a? Hash
         begin
           validate_options(options)
         rescue InvalidOptions => e
-          add_config_error_message("#{page_item_name}\n#{e.message}")
+          add_config_error_message "#{title}\n#{e.message}"
         end
+      else
+        add_config_error_message "#{title}\nMissing options."
       end
     end
   end

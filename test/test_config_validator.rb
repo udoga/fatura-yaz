@@ -52,6 +52,20 @@ The position attribute is required.")
     @validator.validate_config config
   end
 
+  def test_validates_addenda
+    assert_valid_config({'addenda' => {'content' => {'left' => [0, 0]}}})
+    assert_invalid_config({'addenda' => {'content' => {'wrong_option' => 'value'}}},
+        "addenda - 'content'\nInvalid attribute: 'wrong_option'\nThe position attribute is required.")
+  end
+
+  def test_invalid_config_if_missing_options
+    assert_invalid_config({'date' => 1}, "date\nMissing options.")
+    assert_invalid_config({'buyer-name' => 'value', 'addenda' => 1},
+        "buyer-name\nMissing options.\n\naddenda\nMissing contents.")
+    assert_invalid_config({'addenda' => {'content' => 'value'}},
+        "addenda - 'content'\nMissing options.")
+  end
+
   private
   def assert_valid_options(options)
     @validator.validate_options(options)

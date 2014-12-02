@@ -75,6 +75,7 @@ class TestPageWriter < MiniTest::Test
     assert_equal result, @writer.convert_options(options, @text)
   end
 
+  private
   def set_text(text)
     @text = text
     @text_width = @writer.width_of(text)
