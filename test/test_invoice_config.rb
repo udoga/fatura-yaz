@@ -3,24 +3,24 @@ require_relative '../lib/invoice_config'
 
 class TestPageConfig < MiniTest::Test
   def setup
-    @valid_config = InvoiceConfig.from_file('config/valid.yml')
+    @config = InvoiceConfig.from_file('config/valid.yml')
     @empty_config = InvoiceConfig.from_file('config/empty.yml')
   end
 
   def test_gets_yaml_parameters
-    assert_equal 'A4', @valid_config.page_size
-    assert_equal 12, @valid_config.font_size
+    assert_equal 'A4', @config.page_size
+    assert_equal 12, @config.font_size
   end
 
   def test_has_default_values
-    assert_equal '../fonts/Arial.ttf', @valid_config.font
-    assert_equal 0, @valid_config.default_leading
+    assert_equal 'Arial', @config.font
+    assert_equal 0, @config.default_leading
   end
 
   def test_page_items
-    assert_equal({:left => [429, 619]}, @valid_config.page_item('date'))
-    assert_equal 230, @valid_config.page_item('buyer-address')[:width]
-    assert_equal [317, 499], @valid_config.page_item('line_items.quantity')[:center]
+    assert_equal({:left => [429, 619]}, @config.page_item('date'))
+    assert_equal 230, @config.page_item('buyer-address')[:width]
+    assert_equal [317, 499], @config.page_item('line_items.quantity')[:center]
   end
 
   def test_absent_page_items
@@ -30,8 +30,8 @@ class TestPageConfig < MiniTest::Test
   end
 
   def test_addenda
-    assert_equal 9, @valid_config.addenda('some content')[:size]
-    assert_equal ['some content'], @valid_config.get_addenda_contents
+    assert_equal 9, @config.addenda('some content')[:size]
+    assert_equal ['some content'], @config.get_addenda_contents
   end
 
   def test_empty_addenda

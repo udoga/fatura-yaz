@@ -1,6 +1,7 @@
 class ConfigValidator
   def validate_config(config)
     @config_error_message = nil
+    validate_general_settings(config)
     validate_page_items_options(config)
     validate_addenda_options(config)
     raise InvalidConfig.new @config_error_message if @config_error_message
@@ -14,6 +15,13 @@ class ConfigValidator
   end
 
   private
+  def validate_general_settings(config)
+    add_config_error_message('Invalid page size.', "\n") unless config.page_size.is_a? String
+    add_config_error_message('Invalid font.', "\n") unless config.font.is_a? String
+    add_config_error_message('Invalid font size.', "\n") unless config.font_size.is_a? Integer
+    add_config_error_message('Invalid default leading.', "\n") unless config.default_leading.is_a? Integer
+  end
+
   def validate_page_items_options(config)
     page_item_names = %w(date time buyer-name buyer-address buyer-tax_office buyer-tax_office_no
 line_items.description line_items.quantity line_items.unit line_items.unit_price line_items.line_total
@@ -50,9 +58,9 @@ total tax_rate tax_amount general_total general_total_reading)
     end
   end
 
-  def add_config_error_message(message)
+  def add_config_error_message(message, space="\n\n")
     if @config_error_message
-      @config_error_message += "\n\n#{message}"
+      @config_error_message += (space + message)
     else
       @config_error_message = message
     end
@@ -82,9 +90,9 @@ total tax_rate tax_amount general_total general_total_reading)
     add_options_error_message 'There can be only one position attribute.' if position_keys.size > 1
   end
 
-  def add_options_error_message(message)
+  def add_options_error_message(message, space="\n")
     if @options_error_message
-      @options_error_message += "\n#{message}"
+      @options_error_message += (space + message)
     else
       @options_error_message = message
     end

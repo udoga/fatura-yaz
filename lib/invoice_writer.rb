@@ -4,7 +4,7 @@ class InvoiceWriter
   def initialize(config)
     @config = config
     @writer = PageWriter.new(margin: 0, page_size: @config.page_size)
-    @writer.font @config.font
+    @writer.font '../fonts/' + @config.font + '.ttf'
     @writer.font_size @config.font_size
     @writer.default_leading @config.default_leading
   end

@@ -66,6 +66,13 @@ The position attribute is required.")
         "addenda - 'content'\nMissing options.")
   end
 
+  def test_validates_general_settings
+    assert_invalid_config({'page_size' => 0, 'font' => 0, 'font_size' => 'value', 'default_leading' => 'value'},
+    "Invalid page size.\nInvalid font.\nInvalid font size.\nInvalid default leading.")
+    assert_invalid_config({'page_size' => 0, 'date' => 0},
+    "Invalid page size.\n\ndate\nMissing options.")
+  end
+
   private
   def assert_valid_options(options)
     @validator.validate_options(options)

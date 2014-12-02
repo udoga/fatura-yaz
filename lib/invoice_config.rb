@@ -5,8 +5,8 @@ class InvoiceConfig
 
   def initialize(params)
     @page_size = params.delete('page_size') || 'A4'
-    @font = '../fonts/' + (params.delete('font') || 'Arial') + '.ttf'
-    @font_size = params.delete('font_size') || '10'
+    @font = params.delete('font') || 'Arial'
+    @font_size = params.delete('font_size') || 10
     @default_leading = params.delete('default_leading') || 0
     @addenda = params.delete('addenda') || {}
     @page_items = params
@@ -14,8 +14,8 @@ class InvoiceConfig
 
   def self.from_file(config_file)
     params = YAML.load_file(config_file)
-    invoice_config = new(params)
-    return invoice_config
+    params = {} unless params and params.is_a? Hash
+    return new(params)
   end
 
   def page_item(page_item_name)
