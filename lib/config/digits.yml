@@ -4,55 +4,55 @@ font_size: 10
 default_leading: 2
 
 date:
-  left: [429, 627]
+  left: [151, 221]
 time:
-  left: [429, 598]
+  left: [151, 211]
 buyer-name:
-  left: [80, 641]
+  left: [28, 226]
 buyer-address:
-  left: [80, 627]
-  width: 230
-  height: 42
+  left: [28, 221]
+  width: 81
+  height: 15
 buyer-tax_office:
-  left: [80, 556]
+  left: [28, 196]
 buyer-tax_office_no:
-  left: [358, 556]
+  left: [126, 196]
 line_items:
-  row_space: 14
+  row_space: 5
   description:
-    left: [80, 499]
-    width: 219
+    left: [28, 176]
+    width: 77
   quantity:
-    center: [317, 499]
-    width: 36
+    center: [112, 176]
+    width: 13
   unit:
-    center: [346, 499]
-    width: 22
+    center: [122, 176]
+    width: 8
   unit_price:
-    right: [421, 499]
-    width: 63
+    right: [149, 176]
+    width: 22
   line_total:
-    right: [529, 499]
-    width: 108
+    right: [187, 176]
+    width: 38
 total:
-  right: [529, 170]
+  right: [187, 60]
 tax_rate:
-  right: [421, 139]
+  right: [149, 49]
 tax_amount:
-  right: [529, 139]
+  right: [187, 49]
 general_total:
-  right: [529, 108]
+  right: [187, 38]
 general_total_reading:
-  left: [80, 170]
+  left: [28, 60]
 
 addenda:
   'Internet      :  www.example.com':
-    left: [336, 711]
+    left: [119, 251]
     size: 9
   'Tic. Sicil No :  750000':
-    left: [336, 697]
+    left: [119, 246]
     size: 9
   'Hesap No    : Isbank TR000000000000000000000000':
-    left: [44, 139]
+    left: [16, 49]
   'Teslim Alan :':
-    left: [44, 108]
+    left: [16, 38]
