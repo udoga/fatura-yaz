@@ -8,25 +8,25 @@ class TestConfigValidator < MiniTest::Test
   end
 
   def test_validates_options
-    assert_valid_options({:left => [0, 0]})
-    assert_invalid_options({:left => [0, 0], :something => 'value'}, "Invalid attribute: 'something'")
-    assert_invalid_options({:left => 'wrong type'}, "'left' value must be an integer array.")
-    assert_invalid_options({:right => [2, 'wrong type']}, "'right' value must be an integer array.")
-    assert_invalid_options({:center => [1, 2, 3]}, "'center' value array size must be 2.")
-    assert_invalid_options({:left => [0, 0], :width => 'wrong type'}, "'width' value must be an integer.")
-    assert_invalid_options({:left => [0, 0], :single_line => 1}, "'single_line' value must be boolean.")
+    assert_valid_options({'left' => [0, 0]})
+    assert_invalid_options({'left' => [0, 0], 'something' => 'value'}, "Invalid attribute: 'something'")
+    assert_invalid_options({'left' => 'wrong type'}, "'left' value must be an integer array.")
+    assert_invalid_options({'right' => [2, 'wrong type']}, "'right' value must be an integer array.")
+    assert_invalid_options({'center' => [1, 2, 3]}, "'center' value array size must be 2.")
+    assert_invalid_options({'left' => [0, 0], 'width' => 'wrong type'}, "'width' value must be an integer.")
+    assert_invalid_options({'left' => [0, 0], 'single_line' => 1}, "'single_line' value must be boolean.")
   end
 
   def test_validates_position_key
     assert_invalid_options({}, 'The position attribute is required.')
-    assert_invalid_options({:width => 300}, 'The position attribute is required.')
-    assert_invalid_options({:left => [0, 0], :right => [0, 0]}, 'There can be only one position attribute.')
+    assert_invalid_options({'width' => 300}, 'The position attribute is required.')
+    assert_invalid_options({'left' => [0, 0], 'right' => [0, 0]}, 'There can be only one position attribute.')
   end
 
   def test_shows_all_errors_in_options
-    assert_invalid_options({:something => 'value', :left => 'wrong type'},
+    assert_invalid_options({'something' => 'value', 'left' => 'wrong type'},
         "Invalid attribute: 'something'\n'left' value must be an integer array.")
-    assert_invalid_options({:width => 'wrong type'},
+    assert_invalid_options({'width' => 'wrong type'},
         "'width' value must be an integer.\nThe position attribute is required.")
   end
 
@@ -45,11 +45,6 @@ class TestConfigValidator < MiniTest::Test
 buyer-address
 Invalid attribute: 'something'
 The position attribute is required.")
-  end
-
-  def test_validate_valid_yml
-    config = InvoiceConfig.from_file('config/valid.yml')
-    @validator.validate_config config
   end
 
   def test_validates_addenda
@@ -71,6 +66,11 @@ The position attribute is required.")
     "Invalid page size.\nInvalid font.\nInvalid font size.\nInvalid default leading.")
     assert_invalid_config({'page_size' => 0, 'date' => 0},
     "Invalid page size.\n\ndate\nMissing options.")
+  end
+
+  def test_validate_valid_yml
+    config = InvoiceConfig.from_file('config/valid.yml')
+    @validator.validate_config config
   end
 
   private

@@ -27,34 +27,31 @@ class ConfigValidator
 line_items.description line_items.quantity line_items.unit line_items.unit_price line_items.line_total
 total tax_rate tax_amount general_total general_total_reading)
     page_item_names.each do |page_item_name|
-      options = config.page_item(page_item_name)
-      validate_config_group(options, page_item_name)
+      options = config.get_parameter(page_item_name)
+      validate_config_group(options, page_item_name) if options
     end
   end
 
   def validate_addenda_options(config)
-    addenda_contents = config.get_addenda_contents
-    if addenda_contents.is_a? Array
-      addenda_contents.each do |addenda_content|
-        options = config.addenda(addenda_content)
-        validate_config_group(options, "addenda - '#{addenda_content}'")
+    addenda = config.get_parameter('addenda')
+    if addenda.is_a? Hash
+      addenda.each do |content, options|
+        validate_config_group(options, "addenda - '#{content}'")
       end
-    else
+    elsif addenda
       add_config_error_message "addenda\nMissing contents."
     end
   end
 
   def validate_config_group(options, title)
-    if options
-      if options.is_a? Hash
-        begin
-          validate_options(options)
-        rescue InvalidOptions => e
-          add_config_error_message "#{title}\n#{e.message}"
-        end
-      else
-        add_config_error_message "#{title}\nMissing options."
+    if options.is_a? Hash
+      begin
+        validate_options(options)
+      rescue InvalidOptions => e
+        add_config_error_message "#{title}\n#{e.message}"
       end
+    else
+      add_config_error_message "#{title}\nMissing options."
     end
   end
 
@@ -74,9 +71,9 @@ total tax_rate tax_amount general_total general_total_reading)
         else
           add_options_error_message "'#{attribute}' value must be an integer array."
         end
-      elsif [:width, :height, :size].include? attribute
+      elsif %w(width height size).include? attribute
         add_options_error_message "'#{attribute}' value must be an integer." unless value.is_a? Integer
-      elsif attribute == :single_line
+      elsif attribute == 'single_line'
         add_options_error_message "'#{attribute}' value must be boolean." unless !!value == value
       else
         add_options_error_message "Invalid attribute: '#{attribute}'"
@@ -103,7 +100,7 @@ total tax_rate tax_amount general_total general_total_reading)
   end
 
   def is_position_key(attribute)
-    [:left, :center, :right].include? attribute
+    %w(left center right).include? attribute
   end
 
   class InvalidConfig < StandardError

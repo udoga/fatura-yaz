@@ -4,6 +4,7 @@ class InvoiceConfig
   attr_reader :page_size, :font_size, :font, :default_leading
 
   def initialize(params)
+    @params = params.clone
     @page_size = params.delete('page_size') || 'A4'
     @font = params.delete('font') || 'Arial'
     @font_size = params.delete('font_size') || 10
@@ -14,27 +15,29 @@ class InvoiceConfig
 
   def self.from_file(config_file)
     params = YAML.load_file(config_file)
-    params = {} unless params and params.is_a? Hash
+    params = {} unless params.is_a? Hash
     return new(params)
   end
 
   def page_item(page_item_name)
     options = get_key_path_value(@page_items, page_item_name.split('.'))
-    return nil unless options
-    return options unless options.is_a? Hash
-    convert_keys_to_symbols(options)
+    return {} unless options.is_a? Hash
+    convert_keys_to_symbols(options.clone)
   end
 
   def addenda(content)
     options = @addenda[content]
-    return nil unless options
-    return options unless options.is_a? Hash
-    convert_keys_to_symbols(options)
+    return {} unless options.is_a? Hash
+    convert_keys_to_symbols(options.clone)
   end
 
   def get_addenda_contents
-    return @addenda unless @addenda.is_a? Hash
+    return [] unless @addenda.is_a? Hash
     @addenda.keys
+  end
+
+  def get_parameter(path)
+    get_key_path_value(@params, path.split('.'))
   end
 
   private

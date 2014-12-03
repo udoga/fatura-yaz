@@ -41,6 +41,7 @@ class InvoiceWriter
   end
 
   def convert_millimeters_to_points(options)
+    options = options.clone
     options.each do |key, value|
       if [:left, :center, :right].include? key
         options[key] = value.map {|i| mm_to_pt(i)}
