@@ -13,7 +13,6 @@ class TestInvoiceWriter < MiniTest::Test
   end
 
   def test_generate_invoice
-    skip 'takes long time'
     @invoice_writer.generate @invoice_data
   end
 

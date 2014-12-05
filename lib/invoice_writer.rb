@@ -31,6 +31,16 @@ class InvoiceWriter
         @writer.write line_item[field], convert_millimeters_to_points(options) if options
       end
     end
+    # line_items = [
+    #     ["Teknik Hizmet Bedeli\n  ( 000 TL / Gün )", '20', 'gün', '000.00', '00,000.00'],
+    #     ['Deneme', '30', 'gün', '000.00', '00,000.00']]
+    # field_options = [{:left => [80, 499], :width => 219},
+    #                  {:center => [317, 499], :width => 36},
+    #                  {:center => [346, 499], :width => 22},
+    #                  {:right => [421, 499], :width => 63},
+    #                  {:right => [529, 499], :width => 108}]
+    # table_options = {:row_space => 14}
+    # @writer.write_table_data line_items, field_options, table_options
   end
 
   def write_addenda_contents

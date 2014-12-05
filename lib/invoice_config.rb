@@ -37,7 +37,7 @@ class InvoiceConfig
   end
 
   def get_parameter(path)
-    get_key_path_value(@params, path.split('.'))
+    get_key_path_value(@params.clone, path.split('.'))
   end
 
   private

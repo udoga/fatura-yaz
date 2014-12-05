@@ -39,7 +39,7 @@ class TestPageConfig < MiniTest::Test
     assert_equal({}, @empty_config.addenda('some content'))
   end
 
-  def test_page_item_method_is_stable
+  def test_config_is_stable
     options = @config.page_item('date')
     assert_equal({:left => [429, 619]}, options)
     options['something'] = 'value'

@@ -11,7 +11,7 @@ class TestPageWriter < MiniTest::Test
   end
 
   def test_writes_pdf
-    skip 'takes long time'
+    skip 'generates pdf'
     @writer.write 'Sample text.', left: [100, 200]
     @writer.render_file '../output.pdf'
     assert File.exist?('../output.pdf')
@@ -73,6 +73,15 @@ class TestPageWriter < MiniTest::Test
     options = {:right => [300, 400], :single_line => true}
     result = {:at => [300 - @text_width, 400], :single_line => true}
     assert_equal result, @writer.convert_options(options, @text)
+  end
+
+  def test_draws_table
+    skip 'generates pdf'
+    table_data = [["Cell 11\nLine 2", 'Cell 12'], ['Cell 21', 'Cell 22']]
+    first_row_options = [{:left => [100, 200]}, {:center => [180, 200], :width => 10}]
+    table_options = {:row_space => 14}
+    @writer.write_table_data table_data, first_row_options, table_options
+    @writer.render_file '../output.pdf'
   end
 
   private
