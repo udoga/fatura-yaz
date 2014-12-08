@@ -1,3 +1,5 @@
+require_relative 'page_writer'
+
 class ConfigValidator
   def validate_config(config)
     @config_error_message = nil
@@ -16,10 +18,15 @@ class ConfigValidator
 
   private
   def validate_general_settings(config)
-    add_config_error_message('Invalid page size.', "\n") unless config.page_size.is_a? String
+    add_config_error_message('Invalid page size.', "\n") unless is_valid_page_size? config.page_size
     add_config_error_message('Invalid font.', "\n") unless config.font.is_a? String
     add_config_error_message('Invalid font size.', "\n") unless config.font_size.is_a? Integer
     add_config_error_message('Invalid default leading.', "\n") unless config.default_leading.is_a? Integer
+  end
+
+  def is_valid_page_size?(value)
+    PageWriter::PAGE_SIZES.keys.include? value or
+        (is_int_array value and value.size == 2)
   end
 
   def validate_page_items_options(config)
@@ -66,7 +73,7 @@ total tax_rate tax_amount general_total general_total_reading)
   def validate_attributes_and_types(options)
     options.each do |attribute, value|
       if is_position_key(attribute)
-        if value.is_a? Array and value.all? { |i| i.is_a? Integer }
+        if is_int_array value
           add_options_error_message "'#{attribute}' value array size must be 2." unless value.size == 2
         else
           add_options_error_message "'#{attribute}' value must be an integer array."
@@ -79,6 +86,10 @@ total tax_rate tax_amount general_total general_total_reading)
         add_options_error_message "Invalid attribute: '#{attribute}'"
       end
     end
+  end
+
+  def is_int_array(value)
+    value.is_a? Array and value.all? { |i| i.is_a? Integer}
   end
 
   def validate_position_key(options)

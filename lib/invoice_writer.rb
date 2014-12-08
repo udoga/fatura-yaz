@@ -3,7 +3,7 @@ require_relative 'page_writer'
 class InvoiceWriter
   def initialize(config)
     @config = config
-    @writer = PageWriter.new(margin: 0, page_size: @config.page_size)
+    initialize_page_writer
     @writer.font '../fonts/' + @config.font + '.ttf'
     @writer.font_size @config.font_size
     @writer.default_leading @config.default_leading
@@ -16,6 +16,12 @@ class InvoiceWriter
   end
 
   private
+  def initialize_page_writer
+    page_size = @config.page_size
+    page_size = page_size.map {|i| mm_to_pt(i)} if page_size.is_a? Array
+    @writer = PageWriter.new(margin: 0, page_size: page_size)
+  end
+
   def write_invoice_data(invoice_data)
     invoice_data.each do |field_name, data|
       if data.is_a? Hash

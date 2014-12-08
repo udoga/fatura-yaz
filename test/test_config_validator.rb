@@ -73,6 +73,13 @@ The position attribute is required.")
     @validator.validate_config config
   end
 
+  def test_validates_page_size
+    assert_valid_config({'page_size' => 'A4'})
+    assert_valid_config({'page_size' => [200, 300]})
+    assert_invalid_config({'page_size' => [200, 300, 400]}, 'Invalid page size.')
+    assert_invalid_config({'page_size' => 'something'}, 'Invalid page size.')
+  end
+
   private
   def assert_valid_options(options)
     @validator.validate_options(options)

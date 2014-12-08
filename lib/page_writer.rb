@@ -2,10 +2,12 @@ require 'prawn'
 require 'pdf/core'
 
 class PageWriter < Prawn::Document
+  PAGE_SIZES = PDF::Core::PageGeometry::SIZES
   attr_reader :page_dimensions
 
   def initialize(options)
-    @page_dimensions = get_page_dimensions(options[:page_size])
+    @page_dimensions = options[:page_size]
+    @page_dimensions = PAGE_SIZES[@page_dimensions] if @page_dimensions.is_a? String
     super options
   end
 
@@ -88,9 +90,5 @@ class PageWriter < Prawn::Document
       line_count += (part.empty?)? 1 : (width_of(part) / @width).ceil
     end
     line_count
-  end
-
-  def get_page_dimensions(page_size)
-    PDF::Core::PageGeometry::SIZES[page_size]
   end
 end
