@@ -4,7 +4,7 @@ require_relative '../lib/invoice_config'
 class TestPageConfig < MiniTest::Test
   def setup
     @config = InvoiceConfig.from_file('config/valid.yml')
-    @empty_config = InvoiceConfig.from_file('config/empty.yml')
+    @empty_config = InvoiceConfig.new({})
   end
 
   def test_gets_yaml_parameters
@@ -18,9 +18,9 @@ class TestPageConfig < MiniTest::Test
   end
 
   def test_page_items
-    assert_equal({:left => [429, 619]}, @config.page_item('date'))
-    assert_equal 230, @config.page_item('buyer-address')[:width]
-    assert_equal [317, 499], @config.page_item('line_items.quantity')[:center]
+    assert_equal({:left => [151, 221]}, @config.page_item('date'))
+    assert_equal 81, @config.page_item('buyer-address')[:width]
+    assert_equal [112, 176], @config.page_item('line_items.quantity')[:center]
   end
 
   def test_absent_page_items
@@ -41,13 +41,17 @@ class TestPageConfig < MiniTest::Test
 
   def test_config_is_stable
     options = @config.page_item('date')
-    assert_equal({:left => [429, 619]}, options)
+    assert_equal({:left => [151, 221]}, options)
     options['something'] = 'value'
-    assert_equal({:left => [429, 619]}, @config.page_item('date'))
+    assert_equal({:left => [151, 221]}, @config.page_item('date'))
   end
 
   def test_parameters
-    assert_equal({'left' => [429, 619]}, @config.get_parameter('date'))
-    assert_equal(36, @config.get_parameter('line_items.quantity.width'))
+    assert_equal({'left' => [151, 221]}, @config.get_parameter('date'))
+    assert_equal(13, @config.get_parameter('line_items.quantity.width'))
+  end
+
+  def test_table_options
+    assert_equal({:row_space => 5}, @config.table('line_items'))
   end
 end

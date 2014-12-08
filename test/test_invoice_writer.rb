@@ -24,13 +24,12 @@ class TestInvoiceWriter < MiniTest::Test
      'buyer-address' => "\nİnkılap Mah. Küçüksu Cad. No:111/1\n34768         Ümraniye / İstanbul",
      'buyer-tax_office' => 'ÜMRANİYE',
      'buyer-tax_office_no' => '7360000000',
-     'line_items' => [
-         {'description' => "Teknik Hizmet Bedeli\n  ( 000 TL / Gün )",
-          'quantity' => '20',
-          'unit' => 'Gün',
-          'unit_price' => '000.00',
-          'line_total' => '00,000.00'}
-     ],
+     'line_items' =>
+         {'description' => ["Teknik Hizmet Bedeli\n  ( 000 TL / Gün )", 'Deneme'],
+          'quantity' => %w(20 30),
+          'unit' => %w(gün gün),
+          'unit_price' => %w(000.00 000.00),
+          'line_total' => %w(00,000.00 00,000.00)},
      'total' => '00,000.00',
      'tax_rate' => '00',
      'tax_amount' => '0,000.00',

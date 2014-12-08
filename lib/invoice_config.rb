@@ -36,6 +36,14 @@ class InvoiceConfig
     @addenda.keys
   end
 
+  def table(table_name)
+    valid_table_attributes = ['row_space']
+    options = get_parameter(table_name)
+    return {} unless options.is_a? Hash
+    options = options.select {|k, v| valid_table_attributes.include? k}
+    convert_keys_to_symbols(options.clone)
+  end
+
   def get_parameter(path)
     get_key_path_value(@params.clone, path.split('.'))
   end

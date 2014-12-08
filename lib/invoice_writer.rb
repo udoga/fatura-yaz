@@ -17,36 +17,35 @@ class InvoiceWriter
 
   private
   def write_invoice_data(invoice_data)
-    invoice_data.keys.select{|k| k != 'line_items'}.each do |field_name|
-      options = @config.page_item(field_name)
-      @writer.write invoice_data[field_name], convert_millimeters_to_points(options) if options
-    end
-    write_line_items invoice_data['line_items']
-  end
-
-  def write_line_items(line_items)
-    line_items.each do |line_item|
-      line_item.keys.each do |field|
-        options = @config.page_item("line_items.#{field}")
-        @writer.write line_item[field], convert_millimeters_to_points(options) if options
+    invoice_data.each do |field_name, data|
+      if data.is_a? Hash
+        write_table field_name, data
+      elsif data.is_a? String
+        options = @config.page_item(field_name)
+        @writer.write data, convert_millimeters_to_points(options) unless options.empty?
       end
     end
-    # line_items = [
-    #     ["Teknik Hizmet Bedeli\n  ( 000 TL / Gün )", '20', 'gün', '000.00', '00,000.00'],
-    #     ['Deneme', '30', 'gün', '000.00', '00,000.00']]
-    # field_options = [{:left => [80, 499], :width => 219},
-    #                  {:center => [317, 499], :width => 36},
-    #                  {:center => [346, 499], :width => 22},
-    #                  {:right => [421, 499], :width => 63},
-    #                  {:right => [529, 499], :width => 108}]
-    # table_options = {:row_space => 14}
-    # @writer.write_table_data line_items, field_options, table_options
+  end
+
+  def write_table(table_name, invoice_table_data)
+    table_data = []
+    field_options = []
+    invoice_table_data.each do |field, values|
+      options = @config.page_item(table_name + '.' + field)
+      unless options.empty?
+        field_options << convert_millimeters_to_points(options)
+        table_data << values
+      end
+    end
+    table_data = table_data.transpose
+    table_options = convert_millimeters_to_points(@config.table(table_name))
+    @writer.write_table_data table_data, field_options, table_options
   end
 
   def write_addenda_contents
     @config.get_addenda_contents.each do |content|
       options = @config.addenda(content)
-      @writer.write content, convert_millimeters_to_points(options) if options
+      @writer.write content, convert_millimeters_to_points(options) unless options.empty?
     end
   end
 
@@ -55,7 +54,7 @@ class InvoiceWriter
     options.each do |key, value|
       if [:left, :center, :right].include? key
         options[key] = value.map {|i| mm_to_pt(i)}
-      elsif [:width, :height].include? key
+      elsif [:width, :height, :row_space].include? key
         options[key] = mm_to_pt(value)
       end
     end

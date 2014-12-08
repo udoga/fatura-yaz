@@ -2,20 +2,20 @@ page_size: A4
 font_size: 12
 
 date:
-  left: [429, 619]
+  left: [151, 221]
 buyer-address:
-  left: [80, 626]
-  width: 230
-  height: 42
+  left: [28, 221]
+  width: 81
+  height: 15
 general_total:
-  right: [529, 100]
+  right: [187, 38]
 line_items:
-  row_space: [0, -28]
+  row_space: 5
   quantity:
-    center: [317, 499]
-    width: 36
+    center: [112, 176]
+    width: 13
 
 addenda:
   'some content':
-    left: [336, 711]
+    left: [119, 251]
     size: 9
