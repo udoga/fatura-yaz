@@ -20,13 +20,13 @@ class ConfigValidator
   def validate_general_settings(config)
     add_config_error_message('Invalid page size.', "\n") unless is_valid_page_size? config.page_size
     add_config_error_message('Invalid font.', "\n") unless config.font.is_a? String
-    add_config_error_message('Invalid font size.', "\n") unless config.font_size.is_a? Integer
-    add_config_error_message('Invalid default leading.', "\n") unless config.default_leading.is_a? Integer
+    add_config_error_message('Invalid font size.', "\n") unless config.font_size.is_a? Numeric
+    add_config_error_message('Invalid default leading.', "\n") unless config.default_leading.is_a? Numeric
   end
 
   def is_valid_page_size?(value)
     PageWriter::PAGE_SIZES.keys.include? value or
-        (is_int_array value and value.size == 2)
+        (is_number_array value and value.size == 2)
   end
 
   def validate_page_items_options(config)
@@ -73,13 +73,13 @@ total tax_rate tax_amount general_total general_total_reading)
   def validate_attributes_and_types(options)
     options.each do |attribute, value|
       if is_position_key(attribute)
-        if is_int_array value
-          add_options_error_message "'#{attribute}' value array size must be 2." unless value.size == 2
-        else
-          add_options_error_message "'#{attribute}' value must be an integer array."
+        if not is_number_array value
+          add_options_error_message "'#{attribute}' value must be a number array."
+        elsif value.size != 2
+          add_options_error_message "'#{attribute}' value array size must be 2."
         end
       elsif %w(width height size).include? attribute
-        add_options_error_message "'#{attribute}' value must be an integer." unless value.is_a? Integer
+        add_options_error_message "'#{attribute}' value must be a number." unless value.is_a? Numeric
       elsif attribute == 'single_line'
         add_options_error_message "'#{attribute}' value must be boolean." unless !!value == value
       else
@@ -88,8 +88,8 @@ total tax_rate tax_amount general_total general_total_reading)
     end
   end
 
-  def is_int_array(value)
-    value.is_a? Array and value.all? { |i| i.is_a? Integer}
+  def is_number_array(value)
+    value.is_a? Array and value.all? { |i| i.is_a? Numeric}
   end
 
   def validate_position_key(options)

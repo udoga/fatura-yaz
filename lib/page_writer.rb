@@ -13,7 +13,11 @@ class PageWriter < Prawn::Document
 
   def write(text, options)
     options = convert_options(options, text)
-    text_box text, options
+    begin
+      text_box text, options
+    rescue Prawn::Errors::CannotFit
+      # ignored
+    end
   end
 
   def write_table_data(table_data, first_row_options, table_options)

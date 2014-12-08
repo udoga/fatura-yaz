@@ -10,10 +10,10 @@ class TestConfigValidator < MiniTest::Test
   def test_validates_options
     assert_valid_options({'left' => [0, 0]})
     assert_invalid_options({'left' => [0, 0], 'something' => 'value'}, "Invalid attribute: 'something'")
-    assert_invalid_options({'left' => 'wrong type'}, "'left' value must be an integer array.")
-    assert_invalid_options({'right' => [2, 'wrong type']}, "'right' value must be an integer array.")
+    assert_invalid_options({'left' => 'wrong type'}, "'left' value must be a number array.")
+    assert_invalid_options({'right' => [2, 'wrong type']}, "'right' value must be a number array.")
     assert_invalid_options({'center' => [1, 2, 3]}, "'center' value array size must be 2.")
-    assert_invalid_options({'left' => [0, 0], 'width' => 'wrong type'}, "'width' value must be an integer.")
+    assert_invalid_options({'left' => [0, 0], 'width' => 'wrong type'}, "'width' value must be a number.")
     assert_invalid_options({'left' => [0, 0], 'single_line' => 1}, "'single_line' value must be boolean.")
   end
 
@@ -25,9 +25,9 @@ class TestConfigValidator < MiniTest::Test
 
   def test_shows_all_errors_in_options
     assert_invalid_options({'something' => 'value', 'left' => 'wrong type'},
-        "Invalid attribute: 'something'\n'left' value must be an integer array.")
+        "Invalid attribute: 'something'\n'left' value must be a number array.")
     assert_invalid_options({'width' => 'wrong type'},
-        "'width' value must be an integer.\nThe position attribute is required.")
+        "'width' value must be a number.\nThe position attribute is required.")
   end
 
   def test_validates_config
@@ -37,7 +37,7 @@ class TestConfigValidator < MiniTest::Test
     assert_invalid_config({'date' => {'left' => [0, 0], 'something' => 'value'}},
         "date\nInvalid attribute: 'something'")
     assert_invalid_config({'time' => {'center' => [0, 'a']}, 'buyer-address' => {'width' => 230}},
-        "time\n'center' value must be an integer array.\n\nbuyer-address\nThe position attribute is required.")
+        "time\n'center' value must be a number array.\n\nbuyer-address\nThe position attribute is required.")
     assert_invalid_config({'buyer-name' => {'right' => [0]}, 'buyer-address' => {'something' => 'value'}},
 "buyer-name
 'right' value array size must be 2.
