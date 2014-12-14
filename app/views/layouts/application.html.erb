@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FaturaYaz</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div id="logo">Fatura Yaz</div>
+    <div id="menu">
+      <a href="#">Faturalar</a>
+      <%= link_to 'Müşteriler', customers_path %>
+      <a href="#">Ürünler</a>
+    </div>
+  </div>
+  <div id="main">
+    <%= yield %>
+  </div>
+  <div id="footer">
+    Demlik | © 2014
+  </div>
+</div>
+</body>
+</html>

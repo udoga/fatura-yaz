@@ -1,0 +1,32 @@
+<div class="main_header">
+    <h2>Müşteriler</h2>
+    <div class="table_menu"><%= link_to '+ Yeni', new_customer_path, :class => 'new' %></div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>İsim</th>
+      <th>Adres</th>
+      <th nowrap="nowrap">Vergi Dairesi</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr class="<%= cycle('odd_row', 'even_row') %>">
+        <td><%= customer.name %></td>
+        <td><%= customer.address %></td>
+        <td><%= customer.tax_office %></td>
+        <td nowrap="nowrap">
+          <%= link_to 'Göster', customer %>
+          <%= link_to 'Düzenle', edit_customer_path(customer) %>
+          <%= link_to 'Sil', customer, method: :delete, data: { confirm: 'Emin misiniz?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,162 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+$theme_color: dodgerblue;
+$header_height: 48px;
+$padding: 16px;
+$border: 1px solid #B4B4B4;
+
+body {
+  background: #E4E4E4;
+  font-family: "DejaVu Sans", sans-serif;
+  font-size: 14px;
+}
+
+#wrapper {
+  width: 700px;
+  margin: auto;
+  background: white;
+  border: $border;
+}
+
+#header {
+  padding: $padding;
+  height: $header_height;
+  border-bottom: $border;
+}
+
+#logo {
+  line-height: $header_height;
+  float: left;
+  color: $theme_color;
+  font-size: 30px;
+}
+
+#menu {
+  float: right;
+  a {
+    line-height: $header_height;
+    padding: 10px;
+    margin-left: 4px;
+    text-decoration: none;
+    background: $theme_color;
+    color: white;
+  }
+}
+
+#main {
+  padding: $padding;
+}
+
+#footer {
+  font-size: 10px;
+  text-align: center;
+  padding: 4px;
+  background: #444444;
+  color: white;
+}
+
+$main_header_height: 30px;
+.main_header {
+  height: $main_header_height;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0px;
+    font-weight: normal;
+    font-size: 20px;
+    float: left;
+    line-height: $main_header_height;
+    color: #444444;
+  }
+
+  .table_menu {
+    float: right;
+    a {
+      line-height: $main_header_height;
+      text-decoration: none;
+      padding: 4px;
+      font-size: 12px;
+      color: white;
+      &.new {
+        background: lightgreen;
+        border: 1px solid mediumseagreen;
+      }
+      &.show {
+        background: cornflowerblue;
+        border: 1px solid royalblue;
+      }
+      &.edit {
+        background: orange;
+        border: 1px solid darkorange;
+      }
+      &.delete {
+        background: indianred;
+        border: 1px solid darkred;
+      }
+    }
+  }
+}
+
+table {
+  border-collapse: collapse;
+  th {
+    font-size: 14px;
+    background: #d6d6d6;
+    border: 1px solid gray;
+    padding: 4px;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  tr.odd_row {
+    background: #ecf2f6;
+  }
+
+  tr.even_row {
+    background: white;
+  }
+
+  td {
+    padding: 4px;
+    border: 1px solid gray;
+    font-size: 12px;
+  }
+}
+
+form {
+  .row {
+    overflow: auto;
+    margin-bottom: 10px;
+    label {
+      width: 40%;
+    }
+    input[type="text"], textarea {
+      width: 55%;
+      float: right;
+      font-size: 14px;
+    }
+  }
+  .actions {
+    input[type="submit"] {
+      float: right;
+    }
+  }
+}
+
+#notice {
+  color: green;
+}
