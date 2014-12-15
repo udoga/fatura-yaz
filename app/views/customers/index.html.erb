@@ -21,7 +21,7 @@
         <td><%= customer.name %></td>
         <td><%= customer.address %></td>
         <td><%= customer.tax_office %></td>
-        <td nowrap="nowrap">
+        <td class="actions">
           <%= link_to 'Göster', customer %>
           <%= link_to 'Düzenle', edit_customer_path(customer) %>
           <%= link_to 'Sil', customer, method: :delete, data: { confirm: 'Emin misiniz?' } %>

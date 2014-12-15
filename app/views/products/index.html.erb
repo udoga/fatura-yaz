@@ -1,0 +1,32 @@
+<div class="main_header">
+  <h2>Ürünler</h2>
+  <div class="table_menu"><%= link_to '+ Yeni', new_product_path, :class => 'new' %></div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Açıklama</th>
+      <th>Birim</th>
+      <th>Birim Fiyatı</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr class="<%= cycle('odd_row', 'even_row') %>">
+        <td><%= product.description %></td>
+        <td><%= product.unit %></td>
+        <td><%= product.unit_price %></td>
+        <td class="actions">
+          <%= link_to 'Göster', product %>
+          <%= link_to 'Düzenle', edit_product_path(product) %>
+          <%= link_to 'Sil', product, method: :delete, data: { confirm: 'Emin misiniz?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

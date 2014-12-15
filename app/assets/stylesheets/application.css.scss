@@ -115,6 +115,7 @@ $main_header_height: 26px;
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
   th {
     background: #003970;
@@ -137,6 +138,10 @@ table {
     padding: 4px;
     border: 1px solid #B4B4B4;
     font-size: 12px;
+    &.actions {
+      width: 120px;
+      text-align: center;
+    }
   }
 
   a {

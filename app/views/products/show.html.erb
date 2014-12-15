@@ -1,0 +1,26 @@
+<div class="main_header">
+  <h2>Ürün</h2>
+  <div class="table_menu">
+    <%= link_to 'Düzenle', edit_product_path(@product), :class => 'edit' %>
+    <%= link_to 'Sil', @product, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  </div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Açıklama:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Birim:</strong>
+  <%= @product.unit %>
+</p>
+
+<p>
+  <strong>Birim Fiyatı:</strong>
+  <%= @product.unit_price %>
+</p>
+
+<%= button_to 'Geri', products_path, :method => :get %>
