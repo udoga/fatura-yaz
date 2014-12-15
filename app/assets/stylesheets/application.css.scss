@@ -16,7 +16,6 @@
 
 $theme_color: dodgerblue;
 $header_height: 48px;
-$padding: 16px;
 $border: 1px solid #B4B4B4;
 
 body {
@@ -33,7 +32,7 @@ body {
 }
 
 #header {
-  padding: $padding;
+  padding: 16px;
   height: $header_height;
   border-bottom: $border;
 }
@@ -58,7 +57,7 @@ body {
 }
 
 #main {
-  padding: $padding;
+  padding: 18px 16px 18px 16px;
 }
 
 #footer {
@@ -69,10 +68,10 @@ body {
   color: white;
 }
 
-$main_header_height: 30px;
+$main_header_height: 26px;
 .main_header {
   height: $main_header_height;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 
   h2 {
     margin: 0px;
@@ -111,19 +110,23 @@ $main_header_height: 30px;
   }
 }
 
+.main_form {
+  margin: 0px 16px 4px 16px;
+}
+
 table {
   border-collapse: collapse;
   th {
-    font-size: 14px;
-    background: #d6d6d6;
-    border: 1px solid gray;
-    padding: 4px;
+    background: #003970;
+    color: #f0f0f0;
+    border: 1px solid #B4B4B4;
+    padding: 6px 4px 6px 4px;
     text-align: left;
     font-weight: normal;
   }
 
   tr.odd_row {
-    background: #ecf2f6;
+    background: #f0f0f0;
   }
 
   tr.even_row {
@@ -132,8 +135,13 @@ table {
 
   td {
     padding: 4px;
-    border: 1px solid gray;
+    border: 1px solid #B4B4B4;
     font-size: 12px;
+  }
+
+  a {
+    color: #444444;
+    padding: 1px;
   }
 }
 
@@ -143,8 +151,11 @@ form {
     margin-bottom: 10px;
     label {
       width: 40%;
+      line-height: 20px;
+      display: inline-block;
     }
     input[type="text"], textarea {
+      border: 1px solid #E4E4E4;
       width: 55%;
       float: right;
       font-size: 14px;

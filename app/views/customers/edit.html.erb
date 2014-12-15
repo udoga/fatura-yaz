@@ -5,5 +5,7 @@
     <%= link_to 'Sil', @customer, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
   </div>
 </div>
-<%= render 'form' %>
-<%= button_to 'Geri', customers_path, :method => :get %>
+<div class="main_form">
+    <%= render 'form' %>
+    <%= button_to 'Geri', customers_path, :method => :get %>
+</div>
