@@ -1,0 +1,11 @@
+<div class="main_header">
+  <h2>Fatura Düzenle</h2>
+  <div class="table_menu">
+    <%= link_to 'Görüntüle', @invoice, :class => 'show' %>
+    <%= link_to 'Sil', @invoice, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  </div>
+</div>
+<div class="main_form">
+  <%= render 'form' %>
+  <%= button_to 'Geri', invoices_path, :method => :get %>
+</div>

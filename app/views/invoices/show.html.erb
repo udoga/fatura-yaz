@@ -1,0 +1,26 @@
+<div class="main_header">
+  <h2>Fatura</h2>
+  <div class="table_menu">
+    <%= link_to 'Düzenle', edit_invoice_path(@invoice), :class => 'edit' %>
+    <%= link_to 'Sil', @invoice, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  </div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tarih:</strong>
+  <%= @invoice.date %>
+</p>
+
+<p>
+  <strong>Zaman:</strong>
+  <%= @invoice.time.strftime('%H:%M') %>
+</p>
+
+<p>
+  <strong>Vergi Oranı:</strong>
+  <%= @invoice.tax_rate %>
+</p>
+
+<%= button_to 'Geri', invoices_path, :method => :get %>

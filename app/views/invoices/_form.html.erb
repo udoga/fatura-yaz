@@ -1,0 +1,33 @@
+<% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h4>
+
+      <ul>
+        <% @invoice.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<%= form_for(@invoice) do |f| %>
+  <div class="row">
+    <label>Tarih</label>
+    <%= f.date_select :date %>
+  </div>
+  <div class="row">
+    <label>Saat</label>
+    <%= f.time_select :time %>
+  </div>
+  <div class = "row">
+    <label>Müşteri</label>
+    <%= f.select(:customer_id, @customers.collect {|c| [c.name, c.id]}) %>
+  </div>
+  <div class="row">
+    <label>Vergi Oranı</label>
+    <%= f.text_field :tax_rate %>
+  </div>
+  <div class="actions">
+    <%= f.submit "#{f.object.new_record? ? 'Oluştur' : 'Güncelle'}" %>
+  </div>
+<% end %>
