@@ -74,7 +74,7 @@ $main_header_height: 26px;
   margin-bottom: 18px;
 
   h2 {
-    margin: 0px;
+    margin: 0;
     font-weight: normal;
     font-size: 20px;
     float: left;
@@ -111,7 +111,7 @@ $main_header_height: 26px;
 }
 
 .main_form {
-  margin: 0px 16px 4px 16px;
+  margin: 0 16px 4px 16px;
 }
 
 table {
@@ -165,6 +165,15 @@ form {
       float: right;
       font-size: 14px;
     }
+    .field_with_errors {
+      float: right;
+      width: 55%;
+      input[type="text"], textarea {
+        width: 100%;
+        background: #ffdbdb;
+        border: 1px solid #ffa1a1;
+      }
+    }
   }
   .actions {
     input[type="submit"] {
@@ -175,4 +184,26 @@ form {
 
 #notice {
   color: green;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid #c00;
+  padding: 7px 7px 0 7px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  h4 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0;
+    background-color: #c00;
+    color: #fff;
+  }
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
 }
