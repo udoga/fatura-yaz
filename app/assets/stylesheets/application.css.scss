@@ -212,7 +212,7 @@ form {
   }
 }
 
-table#line_items {
+table#line_item_form {
   margin-left: 270px;
   margin-bottom: 10px;
   th {
@@ -229,5 +229,41 @@ table#line_items {
       background: #ffdbdb;
       border: 1px solid #ffa1a1;
     }
+  }
+}
+
+table.line_items {
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    background: darkslategray;
+    color: #f0f0f0;
+    border: 1px solid #B4B4B4;
+    padding: 4px;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  tr.odd_row {
+    background: #f0f0f0;
+  }
+
+  tr.even_row {
+    background: white;
+  }
+
+  td {
+    padding: 4px;
+    border: 1px solid #B4B4B4;
+    font-size: 12px;
+    &.actions {
+      width: 120px;
+      text-align: center;
+    }
+  }
+
+  a {
+    color: #444444;
+    padding: 1px;
   }
 }

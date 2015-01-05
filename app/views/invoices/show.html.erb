@@ -19,8 +19,40 @@
 </p>
 
 <p>
+  <strong>Müşteri:</strong>
+  <%= link_to @invoice.customer.name, @invoice.customer %>
+</p>
+
+<table class="line_items">
+    <tr>
+      <th>Ürün</th>
+      <th>Adet</th>
+      <th>Birim Fiyatı</th>
+      <th>Tutar</th>
+    </tr>
+    <% @invoice.line_items.each do |line_item| %>
+      <tr class="<%= cycle('odd_row', 'even_row') %>">
+        <td><%= link_to line_item.product.description, line_item.product %></td>
+        <td><%= line_item.quantity %></td>
+        <td><%= line_item.product.unit_price %></td>
+        <td><%= line_item.total %></td>
+      </tr>
+    <% end %>
+</table>
+
+<p>
+  <strong>Ara Toplam:</strong>
+  <%= @invoice.sub_total %>
+</p>
+
+<p>
   <strong>Vergi Oranı:</strong>
-  <%= @invoice.tax_rate %>
+  <%= '% ' + @invoice.tax_rate.to_s %>
+</p>
+
+<p>
+  <strong>Genel Toplam:</strong>
+  <%= @invoice.general_total %>
 </p>
 
 <%= button_to 'Geri', invoices_path, :method => :get %>

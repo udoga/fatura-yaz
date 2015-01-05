@@ -25,6 +25,6 @@ function deleteRow() {
 }
 
 function setVars() {
-    table = document.getElementById("line_items");
+    table = document.getElementById("line_item_form");
     i = table.rows.length;
 }

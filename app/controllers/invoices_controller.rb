@@ -75,7 +75,11 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :time, :tax_rate, :customer_id,
-                                      line_items_attributes: [:id, :product_id, :quantity, :_destroy])
+      invoice_params = params.require(:invoice).permit(:date, :time, :tax_rate, :customer_id,
+                                      line_items_attributes: [:id, :product_id, :quantity])
+      invoice_params['line_items_attributes'].values.each do |line_item_attr|
+        line_item_attr['_destroy'] = '1' if line_item_attr.length == 1 and line_item_attr.keys.first == 'id'
+      end
+      invoice_params
     end
 end

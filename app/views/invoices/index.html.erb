@@ -11,7 +11,7 @@
       <th>Tarih</th>
       <th>Zaman</th>
       <th>Müşteri</th>
-      <th>Vergi Oranı</th>
+      <th>Toplam</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -22,7 +22,7 @@
         <td><%= invoice.date %></td>
         <td><%= invoice.time.strftime('%H:%M') %></td>
         <td><%= (invoice.customer)? invoice.customer.name : '' %></td>
-        <td><%= invoice.tax_rate %></td>
+        <td><%= invoice.general_total %></td>
         <td class="actions">
             <%= link_to 'Göster', invoice %>
             <%= link_to 'Düzenle', edit_invoice_path(invoice) %>
