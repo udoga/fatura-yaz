@@ -18,13 +18,16 @@ class InvoicesControllerTest < ActionController::TestCase
 
   test "should create invoice" do
     assert_difference('Invoice.count') do
-      post :create, invoice: { date: @invoice.date, tax_rate: @invoice.tax_rate, time: @invoice.time }
+      post :create, invoice: { date: @invoice.date, tax_rate: @invoice.tax_rate, time: @invoice.time,
+                               customer_id: customers(:one).id}
     end
 
     assert_redirected_to invoice_path(assigns(:invoice))
   end
 
   test "should show invoice" do
+    @invoice.customer = customers(:one)
+    @invoice.save
     get :show, id: @invoice
     assert_response :success
   end
@@ -35,7 +38,8 @@ class InvoicesControllerTest < ActionController::TestCase
   end
 
   test "should update invoice" do
-    patch :update, id: @invoice, invoice: { date: @invoice.date, tax_rate: @invoice.tax_rate, time: @invoice.time }
+    patch :update, id: @invoice, invoice: { date: @invoice.date, tax_rate: @invoice.tax_rate, time: @invoice.time,
+                                            customer_id: customers(:one).id}
     assert_redirected_to invoice_path(assigns(:invoice))
   end
 
