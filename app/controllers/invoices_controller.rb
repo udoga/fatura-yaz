@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  before_action :set_customers
+  before_action :set_others
 
   # GET /invoices
   # GET /invoices.json
@@ -16,6 +16,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   def new
     @invoice = Invoice.new
+    @invoice.line_items.build
   end
 
   # GET /invoices/1/edit
@@ -67,12 +68,14 @@ class InvoicesController < ApplicationController
       @invoice = Invoice.find(params[:id])
     end
 
-    def set_customers
+    def set_others
       @customers = Customer.all
+      @products = Product.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:date, :time, :tax_rate, :customer_id)
+      params.require(:invoice).permit(:date, :time, :tax_rate, :customer_id,
+                                      line_items_attributes: [:id, :product_id, :quantity, :_destroy])
     end
 end

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
+  root 'invoices#index'
   resources :invoices
-
   resources :products
-
   resources :customers
 
   # The priority is based upon order of creation: first created -> highest priority.

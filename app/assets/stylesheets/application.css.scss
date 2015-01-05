@@ -114,7 +114,7 @@ $main_header_height: 26px;
   margin: 0 16px 4px 16px;
 }
 
-table {
+table.data {
   width: 100%;
   border-collapse: collapse;
   th {
@@ -152,27 +152,31 @@ table {
 
 form {
   .row {
-    overflow: auto;
     margin-bottom: 10px;
     label {
-      width: 40%;
-      line-height: 20px;
+      width: 270px;
       display: inline-block;
     }
     input[type="text"], textarea {
+      width: 350px;
       border: 1px solid #E4E4E4;
-      width: 55%;
-      float: right;
-      font-size: 14px;
+    }
+    textarea {
+      vertical-align: middle;
     }
     .field_with_errors {
-      float: right;
-      width: 55%;
+      display: inline;
       input[type="text"], textarea {
-        width: 100%;
         background: #ffdbdb;
         border: 1px solid #ffa1a1;
       }
+    }
+  }
+  .line_items {
+    margin-top: 3px;
+    float: left;
+    button {
+      margin: 6px 6px 0 0;
     }
   }
   .actions {
@@ -205,5 +209,25 @@ form {
   ul li {
     font-size: 12px;
     list-style: square;
+  }
+}
+
+table#line_items {
+  margin-left: 270px;
+  margin-bottom: 10px;
+  th {
+    font-weight: normal;
+    text-decoration: underline;
+    text-align: left;
+  }
+  input[type="number"] {
+    width: 40px;
+    border: 1px solid #E4E4E4;
+  }
+  .field_with_errors {
+    input[type="number"] {
+      background: #ffdbdb;
+      border: 1px solid #ffa1a1;
+    }
   }
 }

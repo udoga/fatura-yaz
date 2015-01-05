@@ -27,7 +27,28 @@
     <label>Vergi Oranı</label>
     <%= f.text_field :tax_rate %>
   </div>
-  <div class="actions">
-    <%= f.submit "#{f.object.new_record? ? 'Oluştur' : 'Güncelle'}" %>
+  <div class="line_items">
+    <label>Satır Öğeleri</label><br/>
+    <button type="button" onclick="addRow()">Satır Ekle</button>
+    <button type="button" onclick="deleteRow()">Satır Sil</button>
   </div>
+    <table id="line_items">
+    <tr>
+      <th>Ürün</th>
+      <th>Adet</th>
+    </tr>
+    <%= f.fields_for :line_items do |lf| %>
+      <tr>
+        <td><%= lf.select(:product_id, @products.collect {|p| [p.description, p.id]}) %></td>
+        <td><%= lf.number_field :quantity %></td>
+      </tr>
+    <% end %>
+    </table>
+    <div class="actions">
+      <%= f.submit "#{f.object.new_record? ? 'Oluştur' : 'Güncelle'}" %>
+    </div>
 <% end %>
+
+<script>
+    window.onload = setVars();
+</script>
