@@ -13,8 +13,8 @@ class TestPageWriter < MiniTest::Test
   def test_writes_pdf
     skip 'generates pdf'
     @writer.write 'Sample text.', left: [100, 200]
-    @writer.render_file '../output.pdf'
-    assert File.exist?('../output.pdf')
+    @writer.render_file '../output_sample.pdf'
+    assert File.exist?('../output_sample.pdf')
   end
 
   def test_converts_position_keys
@@ -81,7 +81,7 @@ class TestPageWriter < MiniTest::Test
     first_row_options = [{:left => [100, 200]}, {:center => [180, 200], :width => 10}]
     table_options = {:row_space => 10}
     @writer.write_table_data table_data, first_row_options, table_options
-    @writer.render_file '../output.pdf'
+    @writer.render_file '../output_table.pdf'
   end
 
   private

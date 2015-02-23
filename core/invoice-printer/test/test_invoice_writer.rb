@@ -5,19 +5,16 @@ require_relative '../lib/config_validator'
 
 class TestInvoiceWriter < MiniTest::Test
   def setup
-    @validator = ConfigValidator.new
-    @config = InvoiceConfig.from_file('../lib/config/digits.yml')
-    @validator.validate_config @config
-    @invoice_writer = InvoiceWriter.new(@config)
-    @invoice_data = get_invoice_data
+    @config = InvoiceConfig.from_file('../config/digits.yml')
+    @invoice_writer = InvoiceWriter.new
   end
 
   def test_generate_invoice
-    @invoice_writer.generate @invoice_data
+    @invoice_writer.generate invoice_data, @config
   end
 
   private
-  def get_invoice_data
+  def invoice_data
     {'date' => '01/01/2014',
      'time' => '17:00',
      'buyer-name' => 'ABCD Yazılım ve Dan. Tic. Ltd. Şti.',
