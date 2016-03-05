@@ -14,7 +14,6 @@
  *= require_self
  */
 
-$theme_color: dodgerblue;
 $header_height: 48px;
 $border: 1px solid #B4B4B4;
 
@@ -25,7 +24,7 @@ body {
 }
 
 #wrapper {
-  width: 700px;
+  width: 1000px;
   margin: auto;
   background: white;
   border: $border;
@@ -35,12 +34,13 @@ body {
   padding: 16px;
   height: $header_height;
   border-bottom: $border;
+  background-color: #f4f4f4;
 }
 
 #logo {
   line-height: $header_height;
   float: left;
-  color: $theme_color;
+  color: #2b2ba7;
   font-size: 30px;
 }
 
@@ -51,8 +51,28 @@ body {
     padding: 10px;
     margin-left: 4px;
     text-decoration: none;
-    background: $theme_color;
+    background: #505050;
     color: white;
+    border-radius: 5px;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    margin-left: 148px;
+    background-color: #f9f9f9;
+    width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+    a {
+      all: initial;
+      font-family: "DejaVu Sans", sans-serif;
+      font-size: 13px;
+      display: block;
+      padding: 0px 0px 0px 4px;
+      line-height: 30px;
+    }
+
+    a:hover {background-color: #e8e8e8}
   }
 }
 
@@ -64,7 +84,7 @@ body {
   font-size: 10px;
   text-align: center;
   padding: 4px;
-  background: #444444;
+  background: #525252;
   color: white;
 }
 
@@ -111,19 +131,25 @@ $main_header_height: 26px;
 }
 
 .main_form {
-  margin: 0 16px 4px 16px;
+  width: 640px;
+  margin: 0px auto 4px auto;
+  overflow: auto;
 }
 
 table.data {
   width: 100%;
   border-collapse: collapse;
   th {
-    background: #003970;
-    color: #f0f0f0;
+    background: #cdcde1;
+    color: #404040;
     border: 1px solid #B4B4B4;
     padding: 6px 4px 6px 4px;
     text-align: left;
     font-weight: normal;
+  }
+
+  tr {
+    height: 30px;
   }
 
   tr.odd_row {
@@ -152,7 +178,7 @@ table.data {
 
 form {
   .row {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     label {
       width: 270px;
       display: inline-block;
@@ -186,6 +212,11 @@ form {
   }
 }
 
+.cancel_button {
+  float: right;
+  margin-right: 10px;
+}
+
 #notice {
   color: green;
 }
@@ -214,7 +245,7 @@ form {
 
 table#line_item_form {
   margin-left: 270px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   th {
     font-weight: normal;
     text-decoration: underline;

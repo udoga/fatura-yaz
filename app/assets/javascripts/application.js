@@ -14,3 +14,20 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+function toggleDropdownMenu() {
+	dropdownContent = document.getElementsByClassName("dropdown-content")[0];
+	if (dropdownContent.style.display == "none")
+		dropdownContent.style.display = "block";
+	else
+		dropdownContent.style.display = "none";
+}
+
+window.onclick = function(e) {
+	if (!e.target.matches('.dropdown-button')) {
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		for (var d = 0; d < dropdowns.length; d++) {
+			dropdowns[d].style.display = "none";
+		}
+	}
+}
