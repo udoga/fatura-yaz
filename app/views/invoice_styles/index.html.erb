@@ -1,0 +1,29 @@
+<div class="main_header">
+  <h2>Fatura Şablonları</h2>
+  <div class="table_menu"><%= link_to '+ Yeni', new_invoice_style_path, :class => 'new' %></div>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+<table class="data">
+  <thead>
+    <tr>
+      <th>Şablon Adı</th>
+      <th>Şablon Dosyası</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoice_styles.each do |invoice_style| %>
+      <tr class="<%= cycle('odd_row', 'even_row') %>">
+        <td><%= invoice_style.name %></td>
+        <td><%= invoice_style.style_file %></td>
+        <td class="actions">
+            <%= link_to 'Düzenle', edit_invoice_style_path(invoice_style) %>
+            <%= link_to 'Sil', invoice_style, method: :delete, data: { confirm: 'Emin misiniz?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

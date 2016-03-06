@@ -1,0 +1,25 @@
+<% if @invoice_style.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@invoice_style.errors.count, "error") %> prohibited this invoice from being saved:</h4>
+
+      <ul>
+        <% @invoice_style.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<%= form_for(@invoice_style) do |f| %>
+  <div class="row">
+    <label>Şablon Adı</label>
+    <%= f.text_field :name %>
+  </div>
+  <div class="row">
+    <label>Şablon Dosyası</label>
+    <%= f.file_field :style_file %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Kaydet" %>
+  </div>
+<% end %>

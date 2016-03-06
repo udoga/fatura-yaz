@@ -1,0 +1,10 @@
+<div class="main_header">
+  <h2>Fatura Şablonu</h2>
+  <div class="table_menu">
+    <%= link_to 'Sil', @invoice_style, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  </div>
+</div>
+<div class="main_form">
+    <%= render 'form' %>
+    <%= button_to 'İptal', invoice_styles_path, :method => :get, :class => 'cancel_button' %>
+</div>

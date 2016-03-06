@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'pdf-core', '~> 0.4.0'
 gem 'prawn', '~> 1.3.0'
+gem 'carrierwave', '~> 0.10.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

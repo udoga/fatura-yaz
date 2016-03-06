@@ -107,24 +107,25 @@ $main_header_height: 26px;
     a {
       line-height: $main_header_height;
       text-decoration: none;
-      padding: 4px;
+      padding: 6px;
       font-size: 12px;
       color: white;
+      border-radius: 4px;
       &.new {
-        background: lightgreen;
-        border: 1px solid mediumseagreen;
+        background: #5cb85c;
+        border: 1px solid #4cae4c;
       }
       &.show {
-        background: cornflowerblue;
-        border: 1px solid royalblue;
+        background: #5bc0de;
+        border: 1px solid #46b8da;
       }
       &.edit {
-        background: orange;
-        border: 1px solid darkorange;
+        background: #f0ad4e;
+        border: 1px solid #eea236;
       }
       &.delete {
-        background: indianred;
-        border: 1px solid darkred;
+        background: #d9534f;
+        border: 1px solid #d43f3a;
       }
     }
   }
