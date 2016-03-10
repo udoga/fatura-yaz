@@ -127,6 +127,10 @@ $main_header_height: 26px;
         background: #d9534f;
         border: 1px solid #d43f3a;
       }
+      &.print {
+        color: black;
+        border: 1px solid #cccccc;
+      }
     }
   }
 }

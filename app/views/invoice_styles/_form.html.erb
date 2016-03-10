@@ -1,10 +1,10 @@
 <% if @invoice_style.errors.any? %>
     <div id="error_explanation">
-      <h4><%= pluralize(@invoice_style.errors.count, "error") %> prohibited this invoice from being saved:</h4>
+      <h4><%= pluralize(@invoice_style.errors.count, "error") %> prohibited this invoice style from being saved:</h4>
 
       <ul>
         <% @invoice_style.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+            <li><%= raw message %></li>
         <% end %>
       </ul>
     </div>

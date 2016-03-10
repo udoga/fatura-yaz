@@ -19,7 +19,7 @@ class InvoiceStylesController < ApplicationController
   def update
     @invoice_style = InvoiceStyle.find(params[:id])
     if @invoice_style.update(invoice_style_params)
-      redirect_to invoice_styles_path, notice: 'Fatura başarıyla güncellendi.'
+      redirect_to invoice_styles_path, notice: 'Fatura şablonu başarıyla güncellendi.'
     else
       render 'edit'
     end

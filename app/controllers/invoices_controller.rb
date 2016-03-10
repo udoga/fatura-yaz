@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  before_action :set_invoice, only: [:show, :edit, :update, :destroy, :print_pdf]
   before_action :set_others
 
   # GET /invoices
@@ -60,6 +60,16 @@ class InvoicesController < ApplicationController
       format.html { redirect_to invoices_url, notice: 'Fatura başarıyla silindi.' }
       format.json { head :no_content }
     end
+  end
+
+  def print_pdf
+    output_file_location = "#{Rails.root}/public/output.pdf"
+    @invoice.print_pdf(output_file_location)
+    send_file(
+      output_file_location,
+      filename: "output.pdf",
+      type: "application/pdf"
+    )
   end
 
   private

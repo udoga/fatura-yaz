@@ -19,6 +19,12 @@ class InvoiceConfig
     return new(params)
   end
 
+  def self.from_text(text)
+    params = YAML.load(text)
+    params = {} unless params.is_a? Hash
+    return new(params)
+  end
+
   def page_item(page_item_name)
     options = get_key_path_value(@page_items, page_item_name.split('.'))
     return {} unless options.is_a? Hash

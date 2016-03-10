@@ -1,6 +1,7 @@
 <div class="main_header">
   <h2>Fatura</h2>
   <div class="table_menu">
+    <%= link_to 'Yazdır', print_invoice_path(@invoice), :class => 'print' %>
     <%= link_to 'Düzenle', edit_invoice_path(@invoice), :class => 'edit' %>
     <%= link_to 'Sil', @invoice, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
   </div>
@@ -48,6 +49,11 @@
 <p>
   <strong>Vergi Oranı:</strong>
   <%= '% ' + @invoice.tax_rate.to_s %>
+</p>
+
+<p>
+  <strong>Vergi Miktarı:</strong>
+  <%= @invoice.tax_amount %>
 </p>
 
 <p>

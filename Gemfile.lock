@@ -108,6 +108,7 @@ GEM
     ttfunk (1.4.0)
     turbolinks (2.5.3)
       coffee-rails
+    turkish_support (1.0.2)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.6.0)
@@ -130,6 +131,7 @@ DEPENDENCIES
   spring
   sqlite3
   turbolinks
+  turkish_support
   uglifier (>= 1.3.0)
 
 BUNDLED WITH

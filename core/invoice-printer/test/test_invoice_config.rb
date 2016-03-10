@@ -54,4 +54,9 @@ class TestPageConfig < MiniTest::Test
   def test_table_options
     assert_equal({:row_space => 5}, @config.table('line_items'))
   end
+
+  def test_load_from_text
+    @config = InvoiceConfig.from_text("page_size: A4\n")
+    assert_equal 'A4', @config.page_size
+  end
 end

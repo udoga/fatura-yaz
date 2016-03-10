@@ -1,12 +1,12 @@
 require_relative 'page_writer'
 
 class InvoiceWriter
-  def generate(invoice_data, config)
+  def generate(invoice_data, config, output_file="output.pdf")
     @config = config
     make_page_writer_settings
     write_invoice_data invoice_data
     write_addenda_contents
-    @writer.render_file('output.pdf')
+    @writer.render_file(output_file)
   end
 
   private
@@ -14,7 +14,7 @@ class InvoiceWriter
     page_size = @config.page_size
     page_size = page_size.map {|i| mm_to_pt(i)} if page_size.is_a? Array
     @writer = PageWriter.new(margin: 0, page_size: page_size)
-    @writer.font 'fonts/' + @config.font + '.ttf'
+    @writer.font File.join(File.dirname(__FILE__), ('/../fonts/' + @config.font + '.ttf'))
     @writer.font_size @config.font_size
     @writer.default_leading @config.default_leading
   end
