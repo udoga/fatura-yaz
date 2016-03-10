@@ -71,11 +71,12 @@ class InvoicesController < ApplicationController
     def set_others
       @customers = Customer.all
       @products = Product.all
+      @invoice_styles = InvoiceStyle.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      invoice_params = params.require(:invoice).permit(:date, :time, :tax_rate, :customer_id,
+      invoice_params = params.require(:invoice).permit(:date, :time, :tax_rate, :customer_id, :invoice_style_id,
                                       line_items_attributes: [:id, :product_id, :quantity])
       line_items_attributes = invoice_params['line_items_attributes']
       if line_items_attributes

@@ -19,7 +19,7 @@
     <label>Saat</label>
     <%= f.time_select :time %>
   </div>
-  <div class = "row">
+  <div class="row">
     <label>Müşteri</label>
     <%= f.select(:customer_id, @customers.collect {|c| [c.name, c.id]}) %>
   </div>
@@ -32,7 +32,7 @@
     <button type="button" onclick="addRow()">Satır Ekle</button>
     <button type="button" onclick="deleteRow()">Satır Sil</button>
   </div>
-    <table id="line_item_form">
+  <table id="line_item_form">
     <tr>
       <th>Ürün</th>
       <th>Adet</th>
@@ -43,7 +43,11 @@
         <td><%= lf.number_field :quantity %></td>
       </tr>
     <% end %>
-    </table>
+  </table>
+  <div class="row">
+    <label>Yazdırma Şablonu</label>
+    <%= f.select(:invoice_style_id, @invoice_styles.collect {|s| [s.name, s.id]}) %>
+  </div>
     <div class="actions">
       <%= f.submit "#{f.object.new_record? ? 'Oluştur' : 'Güncelle'}" %>
     </div>

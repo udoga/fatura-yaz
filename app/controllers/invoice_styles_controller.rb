@@ -11,6 +11,11 @@ class InvoiceStylesController < ApplicationController
     @invoice_style = InvoiceStyle.find(params[:id])
   end
 
+  def show
+    @invoice_style = InvoiceStyle.find(params[:id])
+    render 'edit'
+  end
+
   def update
     @invoice_style = InvoiceStyle.find(params[:id])
     if @invoice_style.update(invoice_style_params)

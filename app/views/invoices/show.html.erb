@@ -55,4 +55,9 @@
   <%= @invoice.general_total %>
 </p>
 
+<p>
+  <strong>Yazdırma Şablonu:</strong>
+  <%= link_to @invoice.invoice_style.name, @invoice.invoice_style %>
+</p>
+
 <%= button_to 'Geri', invoices_path, :method => :get %>

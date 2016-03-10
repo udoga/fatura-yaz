@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   resources :invoices
   resources :products
   resources :customers
-
-  resources :invoice_styles, only: [:index, :new, :create, :destroy, :edit, :update]
+  resources :invoice_styles
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
