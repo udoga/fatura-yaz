@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  style_file: MyString
+  style_content: MyText
 
 two:
   name: MyString
-  style_file: MyString
+  style_content: MyText

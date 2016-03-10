@@ -37,6 +37,6 @@ class InvoiceStylesController < ApplicationController
 
   private
   def invoice_style_params
-    params.require(:invoice_style).permit(:name, :style_file)
+    params.require(:invoice_style).permit(:name, :style_content)
   end
 end

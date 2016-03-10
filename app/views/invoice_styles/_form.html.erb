@@ -17,7 +17,10 @@
   </div>
   <div class="row">
     <label>Şablon Dosyası</label>
-    <%= f.file_field :style_file %>
+    <!-- <input type="file" accept=".yml"/> -->
+  </div>
+  <div class="row">
+    <%= f.text_area :style_content, :id => 'invoice-style-content' %>
   </div>
   <div class="actions">
     <%= f.submit "Kaydet" %>
