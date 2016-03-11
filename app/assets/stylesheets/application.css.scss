@@ -40,10 +40,13 @@ body {
 }
 
 #logo {
-  line-height: $header_height;
-  float: left;
-  color: #2b2ba7;
-  font-size: 30px;
+  a {
+    line-height: $header_height;
+    float: left;
+    color: #3942b5;
+    font-size: 29px;
+    text-decoration: none;
+  }
 }
 
 #menu {
@@ -59,20 +62,25 @@ body {
     font-size: 14px;
   }
 
+  .dropdown-button:focus {
+    background-color: #404040;
+  }
+
   .dropdown-content {
     position: absolute;
-    margin-left: 148px;
+    margin-left: 144px;
     background-color: #f9f9f9;
     width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: 1px solid #c0c0c0;
 
     a {
       all: initial;
       font-family: "DejaVu Sans", sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       display: block;
       padding: 0px 0px 0px 4px;
-      line-height: 30px;
+      line-height: 28px;
     }
 
     a:hover {background-color: #e8e8e8}
