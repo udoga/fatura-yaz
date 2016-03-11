@@ -1,31 +1,29 @@
 <div class="main_header">
   <h2>Müşteri</h2>
-  <div class="table_menu">
-    <%= link_to 'Düzenle', edit_customer_path(@customer), :class => 'edit' %>
-    <%= link_to 'Sil', @customer, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  <div class="page_menu">
+    <%= link_to 'Geri', customers_path, :class => 'btn-default' %>
+    <%= link_to 'Düzenle', edit_customer_path(@customer), :class => 'btn-warning' %>
+    <%= link_to 'Sil', @customer, method: :delete, :class => 'btn-danger', data: { confirm: 'Emin misiniz?' } %>
   </div>
 </div>
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>İsim:</strong>
-  <%= @customer.name %>
-</p>
-
-<p>
-  <strong>Adres:</strong>
-  <%= @customer.address %>
-</p>
-
-<p>
-  <strong>Vergi Dairesi:</strong>
-  <%= @customer.tax_office %>
-</p>
-
-<p>
-  <strong>Vergi Dairesi Numarası:</strong>
-  <%= @customer.tax_office_no %>
-</p>
-
-<%= button_to 'Geri', customers_path, :method => :get %>
+<div class="main_info">
+  <p>
+    <strong>İsim:</strong>
+    <span><%= @customer.name %></span>
+  </p>
+  <p>
+    <strong>Adres:</strong>
+    <span><%= @customer.address %></span>
+  </p>
+  <p>
+    <strong>Vergi Dairesi:</strong>
+    <span><%= @customer.tax_office %></span>
+  </p>
+  <p>
+    <strong>Vergi Dairesi No:</strong>
+    <span><%= @customer.tax_office_no %></span>
+  </p>
+</div>

@@ -1,8 +1,9 @@
 <div class="main_header">
   <h2>Ürün Düzenle</h2>
-  <div class="table_menu">
-    <%= link_to 'Görüntüle', @product, :class => 'show' %>
-    <%= link_to 'Sil', @product, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  <div class="page_menu">
+    <%= link_to 'Geri', products_path, :class => 'btn-default' %>
+    <%= link_to 'Görüntüle', @product, :class => 'btn-info' %>
+    <%= link_to 'Sil', @product, method: :delete, :class => 'btn-danger', data: { confirm: 'Emin misiniz?' } %>
   </div>
 </div>
 <div class="main_form">

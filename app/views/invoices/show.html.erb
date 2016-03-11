@@ -1,69 +1,65 @@
 <div class="main_header">
   <h2>Fatura</h2>
-  <div class="table_menu">
-    <%= link_to 'Yazdır', print_invoice_path(@invoice), :class => 'print' %>
-    <%= link_to 'Düzenle', edit_invoice_path(@invoice), :class => 'edit' %>
-    <%= link_to 'Sil', @invoice, method: :delete, :class => 'delete', data: { confirm: 'Emin misiniz?' } %>
+  <div class="page_menu">
+    <%= link_to 'Geri', invoices_path, :class => 'btn-default' %>
+    <%= link_to 'Yazdır', print_invoice_path(@invoice), :class => 'btn-default' %>
+    <%= link_to 'Düzenle', edit_invoice_path(@invoice), :class => 'btn-warning' %>
+    <%= link_to 'Sil', @invoice, method: :delete, :class => 'btn-danger', data: { confirm: 'Emin misiniz?' } %>
   </div>
 </div>
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Tarih:</strong>
-  <%= @invoice.date %>
-</p>
-
-<p>
-  <strong>Zaman:</strong>
-  <%= @invoice.time.strftime('%H:%M') %>
-</p>
-
-<p>
-  <strong>Müşteri:</strong>
-  <%= link_to @invoice.customer.name, @invoice.customer %>
-</p>
-
-<table class="line_items">
-    <tr>
-      <th>Ürün</th>
-      <th>Adet</th>
-      <th>Birim Fiyatı</th>
-      <th>Tutar</th>
-    </tr>
-    <% @invoice.line_items.each do |line_item| %>
-      <tr class="<%= cycle('odd_row', 'even_row') %>">
-        <td><%= link_to line_item.product.description, line_item.product %></td>
-        <td><%= line_item.quantity %></td>
-        <td><%= line_item.product.unit_price %></td>
-        <td><%= line_item.total %></td>
-      </tr>
-    <% end %>
-</table>
-
-<p>
-  <strong>Ara Toplam:</strong>
-  <%= @invoice.sub_total %>
-</p>
-
-<p>
-  <strong>Vergi Oranı:</strong>
-  <%= '% ' + @invoice.tax_rate.to_s %>
-</p>
-
-<p>
-  <strong>Vergi Miktarı:</strong>
-  <%= @invoice.tax_amount %>
-</p>
-
-<p>
-  <strong>Genel Toplam:</strong>
-  <%= @invoice.general_total %>
-</p>
-
-<p>
-  <strong>Yazdırma Şablonu:</strong>
-  <%= link_to @invoice.invoice_style.name, @invoice.invoice_style %>
-</p>
-
-<%= button_to 'Geri', invoices_path, :method => :get %>
+<div class="main_info">
+  <p>
+    <strong>Tarih:</strong>
+    <span><%= @invoice.date %></span>
+  </p>
+  <p>
+    <strong>Zaman:</strong>
+    <span><%= @invoice.time.strftime('%H:%M') %></span>
+  </p>
+  <p>
+    <strong>Müşteri:</strong>
+    <span><%= link_to @invoice.customer.name, @invoice.customer %></span>
+  </p>
+  <p>
+    <strong>Satır Öğeleri:</strong>
+    <table class="line_items">
+        <tr>
+          <th>Ürün</th>
+          <th>Adet</th>
+          <th>Birim Fiyatı</th>
+          <th>Tutar</th>
+        </tr>
+        <% @invoice.line_items.each do |line_item| %>
+          <tr class="<%= cycle('odd_row', 'even_row') %>">
+            <td><%= link_to line_item.product.description, line_item.product %></td>
+            <td><%= line_item.quantity %></td>
+            <td><%= line_item.product.unit_price %></td>
+            <td><%= line_item.total %></td>
+          </tr>
+        <% end %>
+    </table>
+  </p>
+  <p>
+    <strong>Ara Toplam:</strong>
+    <span><%= @invoice.sub_total %></span>
+  </p>
+  <p>
+    <strong>Vergi Oranı:</strong>
+    <span><%= '%' + @invoice.tax_rate.to_s %></span>
+  </p>
+  <p>
+    <strong>Vergi Miktarı:</strong>
+    <span><%= @invoice.tax_amount %></span>
+  </p>
+  <p>
+    <strong>Genel Toplam:</strong>
+    <span><%= @invoice.general_total %></span>
+  </p>
+  <p>
+    <strong>Yazdırma Şablonu:</strong>
+    <span><%= link_to @invoice.invoice_style.name, @invoice.invoice_style %></span>
+  </p>
+</div>
