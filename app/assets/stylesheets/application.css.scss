@@ -20,7 +20,7 @@ $header_height: 48px;
 $border: 1px solid #B4B4B4;
 
 body {
-  background: #E4E4E4;
+  background: #EAEAEA;
   font-family: "DejaVu Sans", sans-serif;
   font-size: 12px;
 }
@@ -312,5 +312,31 @@ table.line_items {
 
   span {
     display: inline-block;
+  }
+}
+
+.login-box {
+  margin: auto;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  width: 200px;
+  height: 90px;
+  text-align: center;
+
+  .logo {
+    color: #3942b5;
+    font-size: 29px;
+    margin-bottom: 25px;
+  }
+
+  a#sign_in {
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
   }
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FaturaYaz Giriş</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+</head>
+<body>
+  <div class="login-box">
+    <div class="logo">Fatura Yaz</div>
+    <%= link_to "Google ile Oturum Açın", "/auth/google_oauth2", id: "sign_in", :class => 'btn-primary' %>
+  </div>
+</body>
+</html>

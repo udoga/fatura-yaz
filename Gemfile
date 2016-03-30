@@ -31,6 +31,8 @@ gem 'prawn', '~> 1.3.0'
 gem 'carrierwave', '~> 0.10.0'
 gem 'turkish_support'
 
+gem "omniauth-google-oauth2"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
