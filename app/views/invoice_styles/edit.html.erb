@@ -2,7 +2,7 @@
   <h2>Fatura Şablonu</h2>
   <div class="page_menu">
     <%= link_to 'Geri', invoice_styles_path, :class => 'btn-default' %>
-    <%= link_to 'Sil', @invoice_style, method: :delete, :class => 'btn-danger', data: { confirm: 'Emin misiniz?' } %>
+    <%= (link_to 'Sil', @invoice_style, method: :delete, :class => 'btn-danger', data: { confirm: 'Emin misiniz?' }) if @invoice_style.id != 1 %>
   </div>
 </div>
 <div class="main_form">

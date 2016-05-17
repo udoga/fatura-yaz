@@ -19,7 +19,7 @@
         <td><%= invoice_style.name %></td>
         <td class="actions">
             <%= link_to 'Düzenle', edit_invoice_style_path(invoice_style) %>
-            <%= link_to 'Sil', invoice_style, method: :delete, data: { confirm: 'Emin misiniz?' } %>
+            <%= link_to 'Sil', invoice_style, method: :delete, data: { confirm: 'Emin misiniz?' } if invoice_style.id != 1 %>
         </td>
       </tr>
     <% end %>

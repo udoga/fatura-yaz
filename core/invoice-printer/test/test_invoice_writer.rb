@@ -5,7 +5,7 @@ require_relative '../lib/config_validator'
 
 class TestInvoiceWriter < MiniTest::Test
   def setup
-    @config = InvoiceConfig.from_file('../config/digits.yml')
+    @config = InvoiceConfig.from_file('../config/sample_style.yml')
     @invoice_writer = InvoiceWriter.new
   end
 

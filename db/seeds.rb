@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+InvoiceStyle.create({name: "Örnek Şablon", style_content: File.read("#{Rails.root}/core/invoice-printer/config/sample_style.yml")})

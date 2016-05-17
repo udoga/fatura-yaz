@@ -2,6 +2,6 @@ Fatura Yaz
 ----------
 
 	bundle install
-	rake db:migrate
+	rake db:setup
 	rails server
 

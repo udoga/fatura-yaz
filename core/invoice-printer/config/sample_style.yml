@@ -1,5 +1,5 @@
 page_size: A4
-font: VeraMono
+font: Arial
 font_size: 10
 default_leading: 2
 
@@ -52,7 +52,7 @@ addenda:
   'Tic. Sicil No :  750000':
     left: [119, 246]
     size: 9
-  'Hesap No    : Isbank TR000000000000000000000000':
+  'Hesap No    : Bank TR000000000000000000000000':
     left: [16, 49]
   'Teslim Alan :':
     left: [16, 38]
