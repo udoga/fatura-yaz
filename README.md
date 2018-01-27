@@ -5,3 +5,4 @@ Fatura Yaz
 	rake db:setup
 	rails server
 
+http://localhost:3000

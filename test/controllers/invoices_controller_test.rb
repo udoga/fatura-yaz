@@ -3,6 +3,7 @@ require 'test_helper'
 class InvoicesControllerTest < ActionController::TestCase
   setup do
     @invoice = invoices(:one)
+    @invoice.invoice_style = invoice_styles(:one)
   end
 
   test "should get index" do
